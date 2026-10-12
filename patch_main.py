@@ -92,13 +92,12 @@ INJECT_SCORE_REPORT = '''
     s._levelComplete = function () {
       var id = window._onlineLevelId;
       if (id && startedAt && !this._practiced) {
-        window.__wdLastReport = { id: id, time_ms: Math.max(Date.now() - startedAt, 1000), attempts: attempt };
-        fetch("/api/levels/" + id + "/scores", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "same-origin",
-          body: JSON.stringify(window.__wdLastReport)
-        }).catch(function () {});
+        window.__wdLastReport = { id: String(id), time_ms: Math.max(Date.now() - startedAt, 1000), attempts: attempt, progress: 100 };
+        // cross-origin host: report through the parent page bridge (it owns the
+        // session cookie on webdashers.io)
+        try {
+          window.parent.postMessage({ type: "wd-score", payload: window.__wdLastReport }, "*");
+        } catch (e) {}
       }
       return origComplete.apply(this, arguments);
     };
