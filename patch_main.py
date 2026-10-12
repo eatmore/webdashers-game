@@ -104,6 +104,22 @@ INJECT_SCORE_REPORT = '''
       return origComplete.apply(this, arguments);
     };
   });
+})();
+/* webdashers community patch 3: stall guard — if the BootScene never finishes
+   (a hung asset request on bad networks), reload once; HTTP cache keeps all
+   completed downloads so only the stuck file is retried. */
+(function () {
+  setTimeout(function () {
+    try {
+      var g = window.__wdGame;
+      var boot = g && g.scene && g.scene.getScene("BootScene");
+      var stuck = boot && boot.scene && boot.scene.isActive();
+      if (stuck && !sessionStorage.getItem("wd-autoReloaded")) {
+        sessionStorage.setItem("wd-autoReloaded", "1");
+        location.reload();
+      }
+    } catch (e) {}
+  }, 120000);
 })();'''
 
 
