@@ -33,6 +33,8 @@ INJECT_INSTANCE_AND_AUTOLEVEL = '''window.__wdGame = new Phaser.Game(phaserConfi
     try { s = g.scene.getScene("GameScene"); } catch (e) {}
     if (!s || typeof s._openSearchResultScene !== "function") { if (tries > 120) clearInterval(t); return; }
     clearInterval(t);
+    var boot = document.getElementById("boot-loading");
+    if (boot) boot.remove(); // safety net: loading-screen also removes it
     if (window.alreadydownloaded || window._onlineLevelString) return;
     window.alreadydownloaded = true;
     window.fetchGdApi("/downloadGJLevel22.php", {
