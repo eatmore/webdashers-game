@@ -12,6 +12,19 @@
             window.WD_API_BASE = local ? "/api" : "https://webdashers.io/api";
             window.WD_GD_API_BASE = local ? "/api/gd" : "https://webdashers.io/api/gd";
         })();
+        // Neutralize the game's localStorage cache (5MB quota, stores stale data
+        // from previous asset generations and hangs the loader on bad hits).
+        // The browser HTTP cache (immutable assets) fully replaces it.
+        (function () {
+            try {
+                var kill = [];
+                for (var i = 0; i < localStorage.length; i++) {
+                    var k = localStorage.key(i);
+                    if (k && (k.indexOf("webdash_cache_") === 0 || k === "webdash_cache_version" || k === "webdash_assets_loaded" || k === "webdash_last_load_time")) kill.push(k);
+                }
+                for (var j = 0; j < kill.length; j++) localStorage.removeItem(kill[j]);
+            } catch (e) {}
+        })();
     </script>
     <!-- Independent stall guard: runs straight from the HTML, before/without any
          game script. If nothing renders within 40s (a hung script/asset request),
