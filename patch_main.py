@@ -149,6 +149,33 @@ INJECT_SCORE_REPORT = '''
       }
     } catch (e) {}
   }, 45000);
+})();
+/* webdashers community patch 4: ?wdAutoLevel=N — jump straight into built-in
+   level N (1-based) once the game is ready. */
+(function () {
+  var m = location.search.match(/wdAutoLevel=(\d+)/);
+  if (!m) return;
+  var idx = Math.max(1, Math.min(parseInt(m[1], 10), (window.allLevels || []).length));
+  var tries = 0;
+  var t = setInterval(function () {
+    tries++;
+    var g = window.__wdGame;
+    if (!g || !g.scene) { if (tries > 150) clearInterval(t); return; }
+    var gs = null;
+    try { gs = g.scene.getScene("GameScene"); } catch (e) {}
+    if (!gs || !gs.load || !(window.allLevels || []).length) { if (tries > 150) clearInterval(t); return; }
+    clearInterval(t);
+    var entry = window.allLevels[idx - 1];
+    if (!entry) return;
+    window.currentlevel = entry.slice();
+    var st = entry[2];
+    gs.load.text(st, "assets/levels/" + st.split("_")[1] + ".txt");
+    gs.load.once("complete", function () {
+      g.registry.set("autoStartGame", true);
+      gs.scene.restart();
+    });
+    gs.load.start();
+  }, 300);
 })();'''
 
 
