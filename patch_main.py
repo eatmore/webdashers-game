@@ -106,20 +106,49 @@ INJECT_SCORE_REPORT = '''
   });
 })();
 /* webdashers community patch 3: stall guard — if the BootScene never finishes
-   (a hung asset request on bad networks), reload once; HTTP cache keeps all
-   completed downloads so only the stuck file is retried. */
+   (a hung asset request on bad networks): show which file is stuck, then
+   reload once after a grace period (HTTP cache keeps completed downloads). */
 (function () {
+  function stuckFiles() {
+    try {
+      var g = window.__wdGame;
+      var boot = g && g.scene && g.scene.getScene("BootScene");
+      if (!boot || !boot.load || !boot.load.files) return [];
+      return Object.keys(boot.load.files)
+        .map(function (k) { return boot.load.files[k]; })
+        .filter(function (f) { return f.state !== "FILE_COMPLETE" && f.state !== "FILE_ERRORED" && f.state !== "FILE_POPULATED"; })
+        .map(function (f) { return String(f.src || k).split("/").pop(); });
+    } catch (e) { return []; }
+  }
+  function showBanner(text) {
+    var b = document.getElementById("wd-stall-info");
+    if (!b) {
+      b = document.createElement("div");
+      b.id = "wd-stall-info";
+      b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#7f1d1d;color:#fecaca;font:12px/1.5 monospace;padding:6px 10px;text-align:center";
+      document.body.appendChild(b);
+    }
+    b.textContent = text;
+  }
   setTimeout(function () {
     try {
       var g = window.__wdGame;
       var boot = g && g.scene && g.scene.getScene("BootScene");
       var stuck = boot && boot.scene && boot.scene.isActive();
-      if (stuck && !sessionStorage.getItem("wd-autoReloaded")) {
-        sessionStorage.setItem("wd-autoReloaded", "1");
-        location.reload();
+      if (stuck) {
+        var files = stuckFiles();
+        showBanner("Loading stuck on: " + (files.slice(0, 3).join(", ") || "unknown") + " — auto retrying in 20s");
+        setTimeout(function () {
+          if (!sessionStorage.getItem("wd-autoReloaded")) {
+            sessionStorage.setItem("wd-autoReloaded", "1");
+            location.reload();
+          } else {
+            showBanner("Still stuck after retry — check network, or report the filename above");
+          }
+        }, 20000);
       }
     } catch (e) {}
-  }, 120000);
+  }, 45000);
 })();'''
 
 
