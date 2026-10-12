@@ -1,1 +1,22 @@
-window.allLevels=[];
+window.allLevels = [
+  ["FirstSteps","First Steps","seed_01",["CommunityPack",""]],
+  ["WarmUpLane","Warm-Up Lane","seed_02",["CommunityPack",""]],
+  ["SunnyBlocks","Sunny Blocks","seed_03",["CommunityPack",""]],
+  ["ChillCube","Chill Cube","seed_04",["CommunityPack",""]],
+  ["MorningDash","Morning Dash","seed_05",["CommunityPack",""]],
+  ["GreenHorizon","Green Horizon","seed_06",["CommunityPack",""]],
+  ["NeonSteps","Neon Steps","seed_07",["CommunityPack",""]],
+  ["DoubleTrouble","Double Trouble","seed_08",["CommunityPack",""]],
+  ["BlockParty","Block Party","seed_09",["CommunityPack",""]],
+  ["SteadyPulse","Steady Pulse","seed_10",["CommunityPack",""]],
+  ["CubeRush","Cube Rush","seed_11",["CommunityPack",""]],
+  ["ElectricSlide","Electric Slide","seed_12",["CommunityPack",""]],
+  ["SpikeGarden","Spike Garden","seed_13",["CommunityPack",""]],
+  ["TripleThreat","Triple Threat","seed_14",["CommunityPack",""]],
+  ["PillarHop","Pillar Hop","seed_15",["CommunityPack",""]],
+  ["BrokenRhythm","Broken Rhythm","seed_16",["CommunityPack",""]],
+  ["HardReset","Hard Reset","seed_17",["CommunityPack",""]],
+  ["Overclocked","Overclocked","seed_18",["CommunityPack",""]],
+  ["StaticStorm","Static Storm","seed_19",["CommunityPack",""]],
+  ["FinalCircuit","Final Circuit","seed_20",["CommunityPack",""]]
+];
