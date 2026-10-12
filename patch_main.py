@@ -107,10 +107,7 @@ INJECT_SCORE_REPORT = '''
 
 def main() -> None:
     minify = "--no-minify" not in sys.argv
-    pristine = subprocess.run(
-        ["git", "show", "HEAD:assets/scripts/core/main.js"],
-        cwd=root, capture_output=True, text=True, check=True,
-    ).stdout
+    pristine = (root / "main.pristine.js").read_text(encoding="utf-8")
 
     assert PATCH_ANCHOR in pristine, "anchor missing in upstream main.js"
     patched = pristine.replace(
