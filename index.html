@@ -6,13 +6,12 @@
     <!-- webdashers.io community config: same-origin when served from the site,
          absolute production URLs when hosted on GitHub Pages (cross-origin). -->
     <script>
-        if (location.hostname.endsWith(".github.io")) {
-            window.WD_API_BASE = "https://webdashers.io/api";
-            window.WD_GD_API_BASE = "https://webdashers.io/api/gd";
-        } else {
-            window.WD_API_BASE = "/api";
-            window.WD_GD_API_BASE = "/api/gd";
-        }
+        (function () {
+            var h = location.hostname;
+            var local = h === "localhost" || h === "127.0.0.1" || h === "webdashers.io" || h.endsWith(".webdashers.io");
+            window.WD_API_BASE = local ? "/api" : "https://webdashers.io/api";
+            window.WD_GD_API_BASE = local ? "/api/gd" : "https://webdashers.io/api/gd";
+        })();
     </script>
     <!-- Independent stall guard: runs straight from the HTML, before/without any
          game script. If nothing renders within 40s (a hung script/asset request),
@@ -41,15 +40,21 @@
             setTimeout(function () {
                 var canvas = document.querySelector("canvas");
                 if (canvas) return; // game engine started; game JS handles the rest
-                banner("Still loading... " + netStats() + " — auto retry in 15s");
-                setTimeout(function () {
-                    if (!sessionStorage.getItem("wd-bootReload")) {
-                        sessionStorage.setItem("wd-bootReload", "1");
-                        location.reload();
-                    } else {
-                        banner("Retry didn't help. " + netStats() + " — if this repeats, your connection to GitHub Pages is being throttled");
-                    }
-                }, 15000);
+                // rotate to the next mirror: same game, different CDN
+                var mirrors = [
+                    "https://eatmore.github.io/webdashers-game/",
+                    "https://cdn.jsdelivr.net/gh/eatmore/webdashers-game@main/",
+                    "https://webdashers.io/game/"
+                ];
+                var tried = parseInt(sessionStorage.getItem("wd-mirror") || "0", 10);
+                var next = tried + 1;
+                if (next < mirrors.length) {
+                    banner("This mirror is slow (" + netStats() + ") — switching to backup " + next + "...");
+                    sessionStorage.setItem("wd-mirror", String(next));
+                    location.replace(mirrors[next] + "index.html" + location.search);
+                } else {
+                    banner("All mirrors failed on your connection. " + netStats() + " — try again later or use a different network");
+                }
             }, 40000);
         })();
     </script>
