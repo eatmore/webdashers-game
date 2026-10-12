@@ -14,6 +14,45 @@
             window.WD_GD_API_BASE = "/api/gd";
         }
     </script>
+    <!-- Independent stall guard: runs straight from the HTML, before/without any
+         game script. If nothing renders within 40s (a hung script/asset request),
+         show diagnostics with loaded-bytes and retry once. -->
+    <script>
+        (function () {
+            function fmtMB(b) { return (b / 1048576).toFixed(1) + " MB"; }
+            function netStats() {
+                var res = performance.getEntriesByType("resource");
+                var bytes = 0, count = 0;
+                for (var i = 0; i < res.length; i++) {
+                    if (res[i].transferSize) { bytes += res[i].transferSize; count++; }
+                }
+                return count + " files / " + fmtMB(bytes) + " loaded";
+            }
+            function banner(t) {
+                var b = document.getElementById("wd-stall-info");
+                if (!b) {
+                    b = document.createElement("div");
+                    b.id = "wd-stall-info";
+                    b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#7f1d1d;color:#fecaca;font:13px/1.6 monospace;padding:8px 12px;text-align:center";
+                    (document.body || document.documentElement).appendChild(b);
+                }
+                b.textContent = t;
+            }
+            setTimeout(function () {
+                var canvas = document.querySelector("canvas");
+                if (canvas) return; // game engine started; game JS handles the rest
+                banner("Still loading... " + netStats() + " — auto retry in 15s");
+                setTimeout(function () {
+                    if (!sessionStorage.getItem("wd-bootReload")) {
+                        sessionStorage.setItem("wd-bootReload", "1");
+                        location.reload();
+                    } else {
+                        banner("Retry didn't help. " + netStats() + " — if this repeats, your connection to GitHub Pages is being throttled");
+                    }
+                }, 15000);
+            }, 40000);
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Web Dashers</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=d31d2d9717">
