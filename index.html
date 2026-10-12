@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- webdashers.io community config: same-origin when served from the site,
+         absolute production URLs when hosted on GitHub Pages (cross-origin). -->
+    <script>
+        if (location.hostname.endsWith(".github.io")) {
+            window.WD_API_BASE = "https://webdashers.io/api";
+            window.WD_GD_API_BASE = "https://webdashers.io/api/gd";
+        } else {
+            window.WD_API_BASE = "/api";
+            window.WD_GD_API_BASE = "/api/gd";
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Web Dashers</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=5a949c015a">
+    <link rel="stylesheet" href="assets/style.css?v=5a949c015a">
+    <style>
+        /* Instant boot screen: visible before any JS runs, removed by loading-screen.js
+           once Phaser has taken over rendering. */
+        #boot-loading {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            background: #101014;
+            z-index: 2147483647;
+            font-family: Arial, sans-serif;
+        }
+        .boot-cube {
+            width: 48px;
+            height: 48px;
+            background: #C1FB3D;
+            border-radius: 6px;
+            animation: boot-bounce 0.6s cubic-bezier(0.2, 0, 0.4, 1) infinite alternate;
+        }
+        @keyframes boot-bounce {
+            from { transform: translateY(0) rotate(0deg); }
+            to   { transform: translateY(-28px) rotate(90deg); }
+        }
+        .boot-text {
+            color: #C1FB3D;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .boot-cube { animation: none; }
+        }
+    </style>
+    <meta name="description" content="Web Dashers is a fan-made browser mod of the Geometry Dash Web Demo. It features the main levels, a built-in level creator, and a level search to play online levels. The project is actively in development, with more features and updates planned.">
+    <meta name="theme-color" content="#C1FB3D">
+
+    <!-- - Embeds - -->
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://web-dashers.github.io/" />
+    <meta property="og:title" content="Web Dashers" />
+    <meta property="og:description" content="Web Dashers is a fan-made browser mod of the Geometry Dash Web Demo. It features the main levels, a built-in level creator, and a level search to play online levels. The project is actively in development, with more features and updates planned." />
+    <meta property="og:image" content="https://web-dashers.github.io/wd_assets/thumbnail_1024.webp" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://web-dashers.github.io/" />
+    <meta property="twitter:title" content="Web Dashers" />
+    <meta property="twitter:description" content="Web Dashers is a fan-made browser mod of the Geometry Dash Web Demo. It features the main levels, a built-in level creator, and an evel search to play online levels. The project is actively in development, with more features and updates planned." />
+    <meta property="twitter:image" content="https://web-dashers.github.io/wd_assets/thumbnail_1024.webp" />
+
+    <!-- Libraries and stuff
+         (all deferred: the page renders immediately while scripts download in
+         parallel; defer scripts execute in document order, preserving the
+         original execution order) -->
+    <link rel="preload" href="assets/scripts/libs/phaser.min.js?v=5a949c015a" as="script">
+    <link rel="preload" href="assets/scripts/game/allObjects.js?v=5a949c015a" as="script">
+    <script defer src="assets/scripts/game/allObjects.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/game/allLevels.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/libs/phaser.min.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/libs/pako.min.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/utils/cache-manager.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/api/GDapiWrapper.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/utils/api-config.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/api/account-api.js?v=5a949c015a"></script>
+    <!-- GD proxy fetch wrapper removed for the webdashers.io fork:
+         upstream workers proxies are third-party infrastructure we no longer call.
+         config.js falls back cleanly when no proxy is configured. -->
+    <script defer src="assets/scripts/utils/config.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/triggers.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/level.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/player.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/audio.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/loading-screen.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/level-editor.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/game-scene.js?v=5a949c015a"></script>
+    <script defer src="assets/scripts/core/main.js?v=5a949c015a"></script>
+    <script>
+        new ResizeObserver(() => {
+            window.dispatchEvent(new Event('resize'));
+        }).observe(document.documentElement);
+
+        document.oncontextmenu = (event) => {
+            event.preventDefault();
+        };
+    </script>
+</head>
+
+<body>
+    <div id="boot-loading" aria-label="Loading Web Dashers">
+        <div class="boot-cube"></div>
+        <p class="boot-text">LOADING</p>
+        <p class="boot-sub" style="color:#71717a;font-size:11px;letter-spacing:0;margin:0">First load downloads the game (~14&nbsp;MB) — after this one time, it opens instantly.</p>
+    </div>
+</body>
+
+</html>
