@@ -623,6 +623,8 @@ this._menuUpdateLogBtn = this.add.image(screenWidth - 30 - 50, 33, "GJ_WebSheet"
     this._menuAchievementsBtn = this.add.image(centerX - 12, screenHeight - 90, "GJ_GameSheet03", "GJ_achBtn_001.webp").setScrollFactor(0).setDepth(30).setInteractive().setTint(0x666666);
     this._expandHitArea(this._menuAchievementsBtn, 1);
     this._makeBouncyButton(this._menuAchievementsBtn, 1, () => {
+      const toast = this.add.bitmapText(screenWidth / 2, screenHeight - 150, "bigFont", "Coming soon in the community edition", 18).setOrigin(0.5).setDepth(2100).setTint(0xc1fb3d);
+      this.tweens.add({ targets: toast, alpha: 0, duration: 1600, delay: 1100, onComplete: () => toast.destroy() });
     }, () => this._menuActive);
     this._menuNewgroundsBtn = this.add.image(centerX + 312, screenHeight - 90, "GJ_GameSheet03", "GJ_ngBtn_001.webp").setScrollFactor(0).setDepth(30).setInteractive();
     this._expandHitArea(this._menuNewgroundsBtn, 1);

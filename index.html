@@ -13,6 +13,9 @@
             window.WD_API_BASE = local ? "" : "https://webdashers.io";
             window.WD_GD_API_BASE = local ? "/api/gd" : "https://webdashers.io/api/gd";
         })();
+        // Skip the upstream BETA update-log popup (its announcement text is
+        // specific to the upstream project, not this community edition).
+        window.updateLogShown = true;
         // Neutralize the game's localStorage cache (5MB quota, stores stale data
         // from previous asset generations and hangs the loader on bad hits).
         // The browser HTTP cache (immutable assets) fully replaces it.
@@ -74,8 +77,8 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Web Dashers</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=fb8e1a8034">
-    <link rel="stylesheet" href="assets/style.css?v=fb8e1a8034">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=9753905106">
+    <link rel="stylesheet" href="assets/style.css?v=9753905106">
     <style>
         /* Instant boot screen: visible before any JS runs, removed by loading-screen.js
            once Phaser has taken over rendering. */
@@ -134,28 +137,28 @@
          (all deferred: the page renders immediately while scripts download in
          parallel; defer scripts execute in document order, preserving the
          original execution order) -->
-    <link rel="preload" href="assets/scripts/libs/phaser.min.js?v=fb8e1a8034" as="script">
-    <link rel="preload" href="assets/scripts/game/allObjects.js?v=fb8e1a8034" as="script">
-    <script defer src="assets/scripts/game/allObjects.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/game/allLevels.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/libs/phaser.min.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/libs/pako.min.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/utils/cache-manager.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/api/GDapiWrapper.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/utils/api-config.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/api/account-api.js?v=fb8e1a8034"></script>
+    <link rel="preload" href="assets/scripts/libs/phaser.min.js?v=9753905106" as="script">
+    <link rel="preload" href="assets/scripts/game/allObjects.js?v=9753905106" as="script">
+    <script defer src="assets/scripts/game/allObjects.js?v=9753905106"></script>
+    <script defer src="assets/scripts/game/allLevels.js?v=9753905106"></script>
+    <script defer src="assets/scripts/libs/phaser.min.js?v=9753905106"></script>
+    <script defer src="assets/scripts/libs/pako.min.js?v=9753905106"></script>
+    <script defer src="assets/scripts/utils/cache-manager.js?v=9753905106"></script>
+    <script defer src="assets/scripts/api/GDapiWrapper.js?v=9753905106"></script>
+    <script defer src="assets/scripts/utils/api-config.js?v=9753905106"></script>
+    <script defer src="assets/scripts/api/account-api.js?v=9753905106"></script>
     <!-- GD proxy fetch wrapper removed for the webdashers.io fork:
          upstream workers proxies are third-party infrastructure we no longer call.
          config.js falls back cleanly when no proxy is configured. -->
-    <script defer src="assets/scripts/utils/config.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/triggers.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/level.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/player.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/audio.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/loading-screen.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/level-editor.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/game-scene.js?v=fb8e1a8034"></script>
-    <script defer src="assets/scripts/core/main.js?v=fb8e1a8034"></script>
+    <script defer src="assets/scripts/utils/config.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/triggers.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/level.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/player.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/audio.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/loading-screen.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/level-editor.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/game-scene.js?v=9753905106"></script>
+    <script defer src="assets/scripts/core/main.js?v=9753905106"></script>
     <script>
         new ResizeObserver(() => {
             window.dispatchEvent(new Event('resize'));
