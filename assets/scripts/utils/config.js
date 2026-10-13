@@ -65,12 +65,7 @@ window.fetchGdAudio = async function (songUrl, options = {}) {
   }
   throw lastError || new Error("No audio endpoint available");
 };
-window.currentlevel = [
-	"stereo_madness", // internal level name
-	"Stereo Madness", // proper level name
-	"level_1",        // level id in assets/levels
-	["RobTop", "Forever Bound"]   // person who made the song
-];
+window.currentlevel = ["placeholder", "Placeholder", "placeholder", ["CommunityPack", ""]];
 window.orbClickScale = 2.0;
 window.orbClickShrinkTime = 250;
 window.orbParticleSize = 3.5;

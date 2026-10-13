@@ -73,6 +73,7 @@ class BootScene extends Phaser.Scene {
   preload() {
     var bootEl = document.getElementById("boot-loading"); if (bootEl) bootEl.remove();
     (window.allLevels || []).forEach(l => this.load.text(l[2], "assets/levels/" + l[2] + ".txt"));
+    this.load.text("placeholder", "assets/levels/placeholder.txt");
     if (window.gameCache) window.gameCache.init();
     (function (game) {
       if (game.renderer.type === Phaser.WEBGL) {
