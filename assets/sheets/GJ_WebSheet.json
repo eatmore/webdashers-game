@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "GJ_WebSheet.webp",
+			"image": "GJ_WebSheet.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 1046,
@@ -10,7 +10,7 @@
 			"scale": 0.5,
 			"frames": [
 				{
-					"filename": "GJ_logo_001.webp",
+					"filename": "GJ_logo_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "GJ_table_top_001.webp",
+					"filename": "GJ_table_top_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "GJ_table_bottom_001.webp",
+					"filename": "GJ_table_bottom_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "GJ_levelComplete_001.webp",
+					"filename": "GJ_levelComplete_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "floorLine_01_001.webp",
+					"filename": "floorLine_01_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -115,7 +115,7 @@
 					}
 				},
 				{
-					"filename": "GJ_progressBar_001.webp",
+					"filename": "GJ_progressBar_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -136,7 +136,7 @@
 					}
 				},
 				{
-					"filename": "GJ_newBest_001.webp",
+					"filename": "GJ_newBest_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -157,7 +157,7 @@
 					}
 				},
 				{
-					"filename": "groundSquare_01_001.webp",
+					"filename": "groundSquare_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -178,7 +178,7 @@
 					}
 				},
 				{
-					"filename": "groundSquareShadow_001.webp",
+					"filename": "groundSquareShadow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -199,7 +199,7 @@
 					}
 				},
 				{
-					"filename": "GJ_playBtn_001.webp",
+					"filename": "GJ_playBtn_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -220,7 +220,7 @@
 					}
 				},
 				{
-					"filename": "GJ_playBtn2_001.webp",
+					"filename": "GJ_playBtn2_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -241,7 +241,7 @@
 					}
 				},
 				{
-					"filename": "d_spikes_01_001.webp",
+					"filename": "d_spikes_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -262,7 +262,7 @@
 					}
 				},
 				{
-					"filename": "RobTopLogoBig_001.webp",
+					"filename": "RobTopLogoBig_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -283,7 +283,7 @@
 					}
 				},
 				{
-					"filename": "downloadApple_001.webp",
+					"filename": "downloadApple_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -304,7 +304,7 @@
 					}
 				},
 				{
-					"filename": "slidergroove.webp",
+					"filename": "slidergroove.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "tryMe_001.webp",
+					"filename": "tryMe_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -346,7 +346,7 @@
 					}
 				},
 				{
-					"filename": "d_spikes_02_001.webp",
+					"filename": "d_spikes_02_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -367,7 +367,7 @@
 					}
 				},
 				{
-					"filename": "downloadGoogle_001.webp",
+					"filename": "downloadGoogle_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -388,7 +388,7 @@
 					}
 				},
 				{
-					"filename": "downloadSteam_001.webp",
+					"filename": "downloadSteam_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -409,7 +409,7 @@
 					}
 				},
 				{
-					"filename": "getIt_001.webp",
+					"filename": "getIt_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -430,7 +430,7 @@
 					}
 				},
 				{
-					"filename": "d_spikes_03_001.webp",
+					"filename": "d_spikes_03_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -451,7 +451,7 @@
 					}
 				},
 				{
-					"filename": "GJ_bigStar_001.webp",
+					"filename": "GJ_bigStar_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -472,7 +472,7 @@
 					}
 				},
 				{
-					"filename": "portal_03_back_001.webp",
+					"filename": "portal_03_back_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -493,7 +493,7 @@
 					}
 				},
 				{
-					"filename": "player_01_001.webp",
+					"filename": "player_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -514,7 +514,7 @@
 					}
 				},
 				{
-					"filename": "GJ_menuBtn_001.webp",
+					"filename": "GJ_menuBtn_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -535,7 +535,7 @@
 					}
 				},
 				{
-					"filename": "GJ_closeBtn_001.webp",
+					"filename": "GJ_closeBtn_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -556,7 +556,7 @@
 					}
 				},
 				{
-					"filename": "pit_01_001.webp",
+					"filename": "pit_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -577,7 +577,7 @@
 					}
 				},
 				{
-					"filename": "chain_01_001.webp",
+					"filename": "chain_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -598,7 +598,7 @@
 					}
 				},
 				{
-					"filename": "portal_03_front_001.webp",
+					"filename": "portal_03_front_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -619,7 +619,7 @@
 					}
 				},
 				{
-					"filename": "portalshine_02_front_001.webp",
+					"filename": "portalshine_02_front_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -640,7 +640,7 @@
 					}
 				},
 				{
-					"filename": "GJ_replayBtn_001.webp",
+					"filename": "GJ_replayBtn_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -661,7 +661,7 @@
 					}
 				},
 				{
-					"filename": "square_03_glow_001.webp",
+					"filename": "square_03_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -682,7 +682,7 @@
 					}
 				},
 				{
-					"filename": "square_02_glow_001.webp",
+					"filename": "square_02_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -703,7 +703,7 @@
 					}
 				},
 				{
-					"filename": "rod_02_001.webp",
+					"filename": "rod_02_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -724,7 +724,7 @@
 					}
 				},
 				{
-					"filename": "square_01_glow_001.webp",
+					"filename": "square_01_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -745,7 +745,7 @@
 					}
 				},
 				{
-					"filename": "square_08_glow_001.webp",
+					"filename": "square_08_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -766,7 +766,7 @@
 					}
 				},
 				{
-					"filename": "portal_04_front_001.webp",
+					"filename": "portal_04_front_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -787,7 +787,7 @@
 					}
 				},
 				{
-					"filename": "plank_01_glow_001.webp",
+					"filename": "plank_01_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -808,7 +808,7 @@
 					}
 				},
 				{
-					"filename": "portalshine_02_back_001.webp",
+					"filename": "portalshine_02_back_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -829,7 +829,7 @@
 					}
 				},
 				{
-					"filename": "GJ_table_side_001.webp",
+					"filename": "GJ_table_side_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -850,7 +850,7 @@
 					}
 				},
 				{
-					"filename": "square_06_glow_001.webp",
+					"filename": "square_06_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -871,7 +871,7 @@
 					}
 				},
 				{
-					"filename": "portal_04_back_001.webp",
+					"filename": "portal_04_back_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -892,7 +892,7 @@
 					}
 				},
 				{
-					"filename": "player_01_glow_001.webp",
+					"filename": "player_01_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -913,7 +913,7 @@
 					}
 				},
 				{
-					"filename": "ship_01_glow_001.webp",
+					"filename": "ship_01_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -934,7 +934,7 @@
 					}
 				},
 				{
-					"filename": "ship_01_001.webp",
+					"filename": "ship_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -955,7 +955,7 @@
 					}
 				},
 				{
-					"filename": "spike_01_glow_001.webp",
+					"filename": "spike_01_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -976,7 +976,7 @@
 					}
 				},
 				{
-					"filename": "square_07_glow_001.webp",
+					"filename": "square_07_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -997,7 +997,7 @@
 					}
 				},
 				{
-					"filename": "plank_01_001.webp",
+					"filename": "plank_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1018,7 +1018,7 @@
 					}
 				},
 				{
-					"filename": "rod_01_001.webp",
+					"filename": "rod_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1039,7 +1039,7 @@
 					}
 				},
 				{
-					"filename": "gradientBar.webp",
+					"filename": "gradientBar.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1060,7 +1060,7 @@
 					}
 				},
 				{
-					"filename": "gj_ytIcon_001.webp",
+					"filename": "gj_ytIcon_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1081,7 +1081,7 @@
 					}
 				},
 				{
-					"filename": "spike_02_glow_001.webp",
+					"filename": "spike_02_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1102,7 +1102,7 @@
 					}
 				},
 				{
-					"filename": "d_ball_01_001.webp",
+					"filename": "d_ball_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1123,7 +1123,7 @@
 					}
 				},
 				{
-					"filename": "rod_ball_01_001.webp",
+					"filename": "rod_ball_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1144,7 +1144,7 @@
 					}
 				},
 				{
-					"filename": "spike_01_001.webp",
+					"filename": "spike_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1165,7 +1165,7 @@
 					}
 				},
 				{
-					"filename": "d_spikes_04_001.webp",
+					"filename": "d_spikes_04_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1186,7 +1186,7 @@
 					}
 				},
 				{
-					"filename": "square_01_001.webp",
+					"filename": "square_01_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1207,7 +1207,7 @@
 					}
 				},
 				{
-					"filename": "square_02_001.webp",
+					"filename": "square_02_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1228,7 +1228,7 @@
 					}
 				},
 				{
-					"filename": "pit_03_001.webp",
+					"filename": "pit_03_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1249,7 +1249,7 @@
 					}
 				},
 				{
-					"filename": "square_03_001.webp",
+					"filename": "square_03_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1270,7 +1270,7 @@
 					}
 				},
 				{
-					"filename": "square_04_001.webp",
+					"filename": "square_04_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1291,7 +1291,7 @@
 					}
 				},
 				{
-					"filename": "square_05_001.webp",
+					"filename": "square_05_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1312,7 +1312,7 @@
 					}
 				},
 				{
-					"filename": "square_06_001.webp",
+					"filename": "square_06_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1333,7 +1333,7 @@
 					}
 				},
 				{
-					"filename": "square_07_001.webp",
+					"filename": "square_07_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1354,7 +1354,7 @@
 					}
 				},
 				{
-					"filename": "square_08_001.webp",
+					"filename": "square_08_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1375,7 +1375,7 @@
 					}
 				},
 				{
-					"filename": "square_09_001.webp",
+					"filename": "square_09_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1396,7 +1396,7 @@
 					}
 				},
 				{
-					"filename": "spike_02_001.webp",
+					"filename": "spike_02_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1417,7 +1417,7 @@
 					}
 				},
 				{
-					"filename": "sliderthumbsel.webp",
+					"filename": "sliderthumbsel.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1438,7 +1438,7 @@
 					}
 				},
 				{
-					"filename": "pit_02_001.webp",
+					"filename": "pit_02_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1459,7 +1459,7 @@
 					}
 				},
 				{
-					"filename": "sliderthumb.webp",
+					"filename": "sliderthumb.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1480,7 +1480,7 @@
 					}
 				},
 				{
-					"filename": "spike_04_glow_001.webp",
+					"filename": "spike_04_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1501,7 +1501,7 @@
 					}
 				},
 				{
-					"filename": "spike_03_glow_001.webp",
+					"filename": "spike_03_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1522,7 +1522,7 @@
 					}
 				},
 				{
-					"filename": "square_01_small_glow_001.webp",
+					"filename": "square_01_small_glow_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1543,7 +1543,7 @@
 					}
 				},
 				{
-					"filename": "plank_01_color_001.webp",
+					"filename": "plank_01_color_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1564,7 +1564,7 @@
 					}
 				},
 				{
-					"filename": "pit_04_001.webp",
+					"filename": "pit_04_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1585,7 +1585,7 @@
 					}
 				},
 				{
-					"filename": "GJ_table_corner_001.webp",
+					"filename": "GJ_table_corner_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1606,7 +1606,7 @@
 					}
 				},
 				{
-					"filename": "GJ_infoIcon_001.webp",
+					"filename": "GJ_infoIcon_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1627,7 +1627,7 @@
 					}
 				},
 				{
-					"filename": "GJ_pauseBtn_clean_001.webp",
+					"filename": "GJ_pauseBtn_clean_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1648,7 +1648,7 @@
 					}
 				},
 				{
-					"filename": "toggleFullscreenOn_001.webp",
+					"filename": "toggleFullscreenOn_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1669,7 +1669,7 @@
 					}
 				},
 				{
-					"filename": "ship_01_2_001.webp",
+					"filename": "ship_01_2_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1690,7 +1690,7 @@
 					}
 				},
 				{
-					"filename": "gj_songIcon_001.webp",
+					"filename": "gj_songIcon_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1711,7 +1711,7 @@
 					}
 				},
 				{
-					"filename": "toggleFullscreenOff_001.webp",
+					"filename": "toggleFullscreenOff_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1732,7 +1732,7 @@
 					}
 				},
 				{
-					"filename": "spike_03_001.webp",
+					"filename": "spike_03_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1753,7 +1753,7 @@
 					}
 				},
 				{
-					"filename": "square_01_small_001.webp",
+					"filename": "square_01_small_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1774,7 +1774,7 @@
 					}
 				},
 				{
-					"filename": "player_01_2_001.webp",
+					"filename": "player_01_2_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1795,7 +1795,7 @@
 					}
 				},
 				{
-					"filename": "square_01_small_color_001.webp",
+					"filename": "square_01_small_color_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1816,7 +1816,7 @@
 					}
 				},
 				{
-					"filename": "GJ_sfxIcon_001.webp",
+					"filename": "GJ_sfxIcon_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1837,7 +1837,7 @@
 					}
 				},
 				{
-					"filename": "square.webp",
+					"filename": "square.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1858,7 +1858,7 @@
 					}
 				},
 				{
-					"filename": "spike_04_001.webp",
+					"filename": "spike_04_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1879,7 +1879,7 @@
 					}
 				},
 				{
-					"filename": "rod_03_001.webp",
+					"filename": "rod_03_001.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -1900,7 +1900,7 @@
 					}
 				},
 				{
-					"filename": "square_04_glow_001.webp",
+					"filename": "square_04_glow_001.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {

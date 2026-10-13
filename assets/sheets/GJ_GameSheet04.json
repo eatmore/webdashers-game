@@ -1,7 +1,7 @@
 {
     "textures": [
         {
-            "image": "GJ_GameSheet04-hd.webp",
+            "image": "GJ_GameSheet04-hd.png",
             "format": "RGBA8888",
             "size": {
                 "w": 1151,
@@ -10,7 +10,7 @@
             "scale": 1.0,
             "frames": [
                 {
-                    "filename": "GJ_challengeBtn_001.webp",
+                    "filename": "GJ_challengeBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_createBtn_001.webp",
+                    "filename": "GJ_createBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_creatorBtn_001.webp",
+                    "filename": "GJ_creatorBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_dailyBtn_001.webp",
+                    "filename": "GJ_dailyBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_eventBtn_001.webp",
+                    "filename": "GJ_eventBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_featuredBtn_001.webp",
+                    "filename": "GJ_featuredBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -136,7 +136,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_freeLevelsBtn_001.webp",
+                    "filename": "GJ_freeLevelsBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_fullBtn_001.webp",
+                    "filename": "GJ_fullBtn_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -178,7 +178,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_gauntletsBtn_001.webp",
+                    "filename": "GJ_gauntletsBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -199,7 +199,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_highscoreBtn_001.webp",
+                    "filename": "GJ_highscoreBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -220,7 +220,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_listsBtn_001.webp",
+                    "filename": "GJ_listsBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -241,7 +241,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_mapBtn_001.webp",
+                    "filename": "GJ_mapBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -262,7 +262,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_mapPacksBtn_001.webp",
+                    "filename": "GJ_mapPacksBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -283,7 +283,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_moreGamesBtn_001.webp",
+                    "filename": "GJ_moreGamesBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -304,7 +304,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_pathsBtn_001.webp",
+                    "filename": "GJ_pathsBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -325,7 +325,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_playBtn_001.webp",
+                    "filename": "GJ_playBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -346,7 +346,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_safeBtn_001.webp",
+                    "filename": "GJ_safeBtn_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -367,7 +367,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_savedBtn_001.webp",
+                    "filename": "GJ_savedBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -388,7 +388,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_searchBtn_001.webp",
+                    "filename": "GJ_searchBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -409,7 +409,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_versusBtn_001.webp",
+                    "filename": "GJ_versusBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -430,7 +430,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_weeklyBtn_001.webp",
+                    "filename": "GJ_weeklyBtn_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -451,7 +451,7 @@
                     }
                 },
                 {
-                    "filename": "boost_01_shine_001.webp",
+                    "filename": "boost_01_shine_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -472,7 +472,7 @@
                     }
                 },
                 {
-                    "filename": "boost_02_shine_001.webp",
+                    "filename": "boost_02_shine_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -493,7 +493,7 @@
                     }
                 },
                 {
-                    "filename": "boost_03_shine_001.webp",
+                    "filename": "boost_03_shine_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -514,7 +514,7 @@
                     }
                 },
                 {
-                    "filename": "boost_04_shine_001.webp",
+                    "filename": "boost_04_shine_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -535,7 +535,7 @@
                     }
                 },
                 {
-                    "filename": "boost_05_shine_001.webp",
+                    "filename": "boost_05_shine_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -556,7 +556,7 @@
                     }
                 },
                 {
-                    "filename": "gj_dailyCrown_001.webp",
+                    "filename": "gj_dailyCrown_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -577,7 +577,7 @@
                     }
                 },
                 {
-                    "filename": "gj_eventCrown_001.webp",
+                    "filename": "gj_eventCrown_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -598,7 +598,7 @@
                     }
                 },
                 {
-                    "filename": "gj_weeklyCrown_001.webp",
+                    "filename": "gj_weeklyCrown_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -619,7 +619,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_001.webp",
+                    "filename": "playerDash2_boom2_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -640,7 +640,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_002.webp",
+                    "filename": "playerDash2_boom2_002.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -661,7 +661,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_003.webp",
+                    "filename": "playerDash2_boom2_003.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -682,7 +682,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_004.webp",
+                    "filename": "playerDash2_boom2_004.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -703,7 +703,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_005.webp",
+                    "filename": "playerDash2_boom2_005.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -724,7 +724,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_006.webp",
+                    "filename": "playerDash2_boom2_006.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -745,7 +745,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_007.webp",
+                    "filename": "playerDash2_boom2_007.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -766,7 +766,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_008.webp",
+                    "filename": "playerDash2_boom2_008.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -787,7 +787,7 @@
                     }
                 },
                 {
-                    "filename": "playerDash2_boom2_009.webp",
+                    "filename": "playerDash2_boom2_009.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -808,7 +808,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_01_back_001.webp",
+                    "filename": "portalshine_01_back_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -829,7 +829,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_01_front_001.webp",
+                    "filename": "portalshine_01_front_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -850,7 +850,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_02_back_001.webp",
+                    "filename": "portalshine_02_back_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -871,7 +871,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_02_front_001.webp",
+                    "filename": "portalshine_02_front_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -892,7 +892,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_03_back_001.webp",
+                    "filename": "portalshine_03_back_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -913,7 +913,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_03_front_001.webp",
+                    "filename": "portalshine_03_front_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -934,7 +934,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_04_back_001.webp",
+                    "filename": "portalshine_04_back_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -955,7 +955,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_04_front_001.webp",
+                    "filename": "portalshine_04_front_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -976,7 +976,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_05_back_001.webp",
+                    "filename": "portalshine_05_back_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -997,7 +997,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_05_front_001.webp",
+                    "filename": "portalshine_05_front_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -1018,7 +1018,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_06_back_001.webp",
+                    "filename": "portalshine_06_back_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -1039,7 +1039,7 @@
                     }
                 },
                 {
-                    "filename": "portalshine_06_front_001.webp",
+                    "filename": "portalshine_06_front_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -1060,7 +1060,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_001.webp",
+                    "filename": "spiderDash_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1081,7 +1081,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_002.webp",
+                    "filename": "spiderDash_002.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1102,7 +1102,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_003.webp",
+                    "filename": "spiderDash_003.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1123,7 +1123,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_004.webp",
+                    "filename": "spiderDash_004.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1144,7 +1144,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_005.webp",
+                    "filename": "spiderDash_005.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1165,7 +1165,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_006.webp",
+                    "filename": "spiderDash_006.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1186,7 +1186,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_007.webp",
+                    "filename": "spiderDash_007.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -1207,7 +1207,7 @@
                     }
                 },
                 {
-                    "filename": "spiderDash_008.webp",
+                    "filename": "spiderDash_008.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1228,7 +1228,7 @@
                     }
                 },
                 {
-                    "filename": "theTowerDoor_001.webp",
+                    "filename": "theTowerDoor_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -1249,7 +1249,7 @@
                     }
                 },
                 {
-                    "filename": "theTowerLabel_001.webp",
+                    "filename": "theTowerLabel_001.png",
                     "rotated": true,
                     "trimmed": true,
                     "sourceSize": {
@@ -1270,7 +1270,7 @@
                     }
                 },
                 {
-                    "filename": "weeklyLevelsLabel_001.webp",
+                    "filename": "weeklyLevelsLabel_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {

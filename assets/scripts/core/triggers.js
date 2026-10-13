@@ -1,1 +1,246 @@
-class Easing{static sample(t,s,e){if(e===0||e===1)return e;switch(t){case 0:return e;case 1:return this._easeInOut(e,s);case 2:return this._easeIn(e,s);case 3:return this._easeOut(e,s);case 4:return this._elasticInOut(e,s);case 5:return this._elasticIn(e,s);case 6:return this._elasticOut(e,s);case 7:return this._bounceInOut(e);case 8:return this._bounceIn(e);case 9:return this._bounceOut(e);case 10:return this._expInOut(e);case 11:return this._expIn(e);case 12:return this._expOut(e);case 13:return this._sineInOut(e);case 14:return this._sineIn(e);case 15:return this._sineOut(e);case 16:return this._backInOut(e);case 17:return this._backIn(e);case 18:return this._backOut(e);default:return e}}static _easeInOut(t,s){const e=t*2;return e<1?.5*Math.pow(e,s):1-.5*Math.pow(2-e,s)}static _easeIn(t,s){return Math.pow(t,s)}static _easeOut(t,s){return Math.pow(t,1/s)}static _elasticInOut(t,s){let e=s||.44999999999999996;const r=e/4,n=t-1;return n<0?-.5*Math.pow(2,10*n)*Math.sin((n-r)*(2*Math.PI)/e):Math.pow(2,-10*n)*Math.sin((n-r)*(2*Math.PI)/e)*.5+1}static _elasticIn(t,s){const e=s/4,r=t-1;return-Math.pow(2,10*r)*Math.sin((r-e)*(2*Math.PI)/s)}static _elasticOut(t,s){const e=s/4;return Math.pow(2,-10*t)*Math.sin((t-e)*(2*Math.PI)/s)+1}static _bounceTime(t){if(t<1/2.75)return 7.5625*t*t;if(t<2/2.75){const s=t-.5454545454545454;return 7.5625*s*s+.75}else if(t<2.5/2.75){const s=t-.8181818181818182;return 7.5625*s*s+.9375}else{const s=t-.9545454545454546;return 7.5625*s*s+.984375}}static _bounceInOut(t){return t<.5?(1-this._bounceTime(1-t*2))*.5:this._bounceTime(t*2-1)*.5+.5}static _bounceIn(t){return 1-this._bounceTime(1-t)}static _bounceOut(t){return this._bounceTime(t)}static _expInOut(t){return t<.5?.5*Math.pow(2,10*(t*2-1)):.5*(-Math.pow(2,-10*(t*2-1))+2)}static _expIn(t){return Math.pow(2,10*(t-1))-.001}static _expOut(t){return-Math.pow(2,-10*t)+1}static _sineInOut(t){return-.5*(Math.cos(t*Math.PI)-1)}static _sineIn(t){return 1-Math.cos(t*Math.PI/2)}static _sineOut(t){return Math.sin(t*Math.PI/2)}static _backInOut(t){const s=2.5949095,e=t*2;return e<1?e*e*((s+1)*e-s)/2:(e-2)*(e-2)*((s+1)*(e-2)+s)/2+1}static _backIn(t){return t*t*((1.70158+1)*t-1.70158)}static _backOut(t){const e=t-1;return e*e*((1.70158+1)*e+1.70158)+1}}class TriggerStepper{constructor(t,s,e){this.from={...t},this.to={...s},this.duration=e,this.elapsed=0,this.done=e<=0,this.current=e<=0?{...s}:{...t}}step(t){if(this.done)return;this.elapsed+=t;let s=this.duration>0?Math.min(this.elapsed/this.duration,1):1;s>=1?(this.current={...this.to},this.done=!0):this.current={r:Math.round(this.from.r+(this.to.r-this.from.r)*s),g:Math.round(this.from.g+(this.to.g-this.from.g)*s),b:Math.round(this.from.b+(this.to.b-this.from.b)*s)}}}class ColorManager{constructor(){this._initialColors={},this.reset()}setInitialColor(t,s){this._initialColors[t]={...s},this._colors[t]={...s}}reset(){this._colors={[fs]:{r:0,g:102,b:255},[gs]:{r:0,g:68,b:170},1002:{r:255,g:255,b:255},1003:{r:255,g:255,b:255},1004:{r:255,g:255,b:255}};for(let t in this._initialColors)this._colors[t]={...this._initialColors[t]};this._coloredChannels=new Set,this._actions={}}triggerColor(t,s,e){this._coloredChannels.add(String(t));let r={...this.getColor(t)};this._actions[t]=new TriggerStepper(r,s,e),e<=0&&(this._colors[t]={...s})}step(t){for(let s in this._actions){let e=this._actions[s];e.step(t),this._colors[s]={...e.current},e.done&&delete this._actions[s]}}getColor(t){return this._colors[t]||{r:255,g:255,b:255}}hasColor(t){return this._coloredChannels.has(String(t))}getHex(t){let s=this.getColor(t);return 4278190080|s.r<<16|s.g<<8|s.b}}function circleEffect(i,t,s,e,r,n,c=!1,h=!1,u=16777215){const o=i.add.graphics().setScrollFactor(0).setDepth(55).setBlendMode(S),a={r:e,t:0};i.tweens.add({targets:a,r,t:1,duration:n,ease:c&&!h?"Quad.Out":"Linear",onUpdate:()=>{const l=h?a.t<.5?a.t*2:(1-a.t)*2:1-a.t;o.clear(),c?(o.fillStyle(u,Math.max(0,l)),o.fillCircle(t,s,a.r)):(o.lineStyle(4,u,Math.max(0,l)),o.strokeCircle(t,s,a.r))},onComplete:()=>o.destroy()})}function particleEffect(i,t=16777215,s=16777215){if(window.enableLDM)return;const e=200,r=e+(screenWidth-400)*Math.random(),n=e+Math.random()*240;circleEffect(i,r,n,40,140+Math.random()*60,500,!0,!0,s),i.add.particles(r,n,"GJ_WebSheet",{frame:"square.webp",speed:{min:520,max:920},angle:{min:0,max:360},scale:{start:.4,end:.13},alpha:{start:1,end:0},lifespan:{min:0,max:500},stopAfter:25,blendMode:S,tint:t,x:{min:-20,max:20},y:{min:-20,max:20}}).setScrollFactor(0).setDepth(57)}
+class Easing {
+  static sample(type, rate, x) {
+    if (x === 0 || x === 1) return x;
+    switch (type) {
+      case 0: return x;
+      case 1: return this._easeInOut(x, rate);
+      case 2: return this._easeIn(x, rate);
+      case 3: return this._easeOut(x, rate);
+      case 4: return this._elasticInOut(x, rate);
+      case 5: return this._elasticIn(x, rate);
+      case 6: return this._elasticOut(x, rate);
+      case 7: return this._bounceInOut(x);
+      case 8: return this._bounceIn(x);
+      case 9: return this._bounceOut(x);
+      case 10: return this._expInOut(x);
+      case 11: return this._expIn(x);
+      case 12: return this._expOut(x);
+      case 13: return this._sineInOut(x);
+      case 14: return this._sineIn(x);
+      case 15: return this._sineOut(x);
+      case 16: return this._backInOut(x);
+      case 17: return this._backIn(x);
+      case 18: return this._backOut(x);
+      default: return x;
+    }
+  };
+  static _easeInOut(x, r) { const t=x*2; return t<1 ? 0.5*Math.pow(t,r) : 1-0.5*Math.pow(2-t,r); };
+  static _easeIn(x, r) { return Math.pow(x, r); };
+  static _easeOut(x, r) { return Math.pow(x, 1/r); };
+  static _elasticInOut(x, p) {
+    let period = p||0.3*1.5; const s=period/4; const t=x-1;
+    return t<0 ? -0.5*Math.pow(2,10*t)*Math.sin((t-s)*(2*Math.PI)/period)
+               : Math.pow(2,-10*t)*Math.sin((t-s)*(2*Math.PI)/period)*0.5+1;
+  };
+  static _elasticIn(x, p) { const s=p/4; const t=x-1; return -Math.pow(2,10*t)*Math.sin((t-s)*(2*Math.PI)/p); };
+  static _elasticOut(x, p) { const s=p/4; return Math.pow(2,-10*x)*Math.sin((x-s)*(2*Math.PI)/p)+1; };
+  static _bounceTime(x) {
+    if (x<1/2.75)          return 7.5625*x*x;
+    else if (x<2/2.75)   { const t=x-1.5/2.75;  return 7.5625*t*t+0.75; }
+    else if (x<2.5/2.75) { const t=x-2.25/2.75; return 7.5625*t*t+0.9375; }
+    else                 { const t=x-2.625/2.75; return 7.5625*t*t+0.984375; }
+  };
+  static _bounceInOut(x) { return x<0.5 ? (1-this._bounceTime(1-x*2))*0.5 : this._bounceTime(x*2-1)*0.5+0.5; };
+  static _bounceIn(x) { return 1-this._bounceTime(1-x); };
+  static _bounceOut(x) { return this._bounceTime(x); };
+  static _expInOut(x) { return x<0.5 ? 0.5*Math.pow(2,10*(x*2-1)) : 0.5*(-Math.pow(2,-10*(x*2-1))+2); };
+  static _expIn(x) { return Math.pow(2,10*(x-1))-0.001; };
+  static _expOut(x) { return -Math.pow(2,-10*x)+1; };
+  static _sineInOut(x) { return -0.5*(Math.cos(x*Math.PI)-1); };
+  static _sineIn(x) { return 1-Math.cos((x*Math.PI)/2); };
+  static _sineOut(x) { return Math.sin((x*Math.PI)/2); };
+  static _backInOut(x) {
+    const ov=1.70158*1.525; const t=x*2;
+    return t<1 ? (t*t*((ov+1)*t-ov))/2 : ((t-2)*(t-2)*((ov+1)*(t-2)+ov))/2+1;
+  };
+  static _backIn(x) { const ov=1.70158; return x*x*((ov+1)*x-ov); };
+  static _backOut(x) { const ov=1.70158; const t=x-1; return t*t*((ov+1)*t+ov)+1; };
+};
+
+class TriggerStepper {
+  constructor(oldColor, newColor, triggerDuration) {
+    this.from = {
+      ...oldColor
+    };
+    this.to = {
+      ...newColor
+    };
+    this.duration = triggerDuration;
+    this.elapsed = 0;
+    this.done = triggerDuration <= 0;
+    this.current = triggerDuration <= 0 ? {
+      ...newColor
+    } : {
+      ...oldColor
+    };
+  }
+  step(timeMillis) {
+    if (this.done) {
+      return;
+    }
+    this.elapsed += timeMillis;
+    let progress = this.duration > 0 ? Math.min(this.elapsed / this.duration, 1) : 1;
+    if (progress >= 1) {
+      this.current = {
+        ...this.to
+      };
+      this.done = true;
+    } else {
+      this.current = {
+        r: Math.round(this.from.r + (this.to.r - this.from.r) * progress),
+        g: Math.round(this.from.g + (this.to.g - this.from.g) * progress),
+        b: Math.round(this.from.b + (this.to.b - this.from.b) * progress)
+      };
+    }
+  }
+}
+class ColorManager {
+  constructor() {
+    this._initialColors = {};
+    this.reset();
+  }
+  setInitialColor(channelId, color) {
+    this._initialColors[channelId] = { ...color };
+    this._colors[channelId] = { ...color };
+  }
+  reset() {
+    this._colors = {
+      [fs]: {
+        r: 0,
+        g: 102,
+        b: 255
+      },
+      [gs]: {
+        r: 0,
+        g: 68,
+        b: 170
+      },
+      1002: {
+        r: 255,
+        g: 255,
+        b: 255
+      },
+      1003: {
+        r: 255,
+        g: 255,
+        b: 255
+      },
+      1004: {
+        r: 255,
+        g: 255,
+        b: 255
+      }
+    };
+    for (let chId in this._initialColors) {
+      this._colors[chId] = { ...this._initialColors[chId] };
+    }
+    this._coloredChannels = new Set();
+    this._actions = {};
+  }
+  triggerColor(index, newColor, duration) {
+    this._coloredChannels.add(String(index));
+    let oldColor = {
+      ...this.getColor(index)
+    };
+    this._actions[index] = new TriggerStepper(oldColor, newColor, duration);
+    if (duration <= 0) {
+      this._colors[index] = {
+        ...newColor
+      };
+    }
+  }
+  step(timeMillis) {
+    for (let actionIndex in this._actions) {
+      let action = this._actions[actionIndex];
+      action.step(timeMillis);
+      this._colors[actionIndex] = {
+        ...action.current
+      };
+      if (action.done) {
+        delete this._actions[actionIndex];
+      }
+    }
+  }
+  getColor(index) {
+    return this._colors[index] || {
+      r: 255,
+      g: 255,
+      b: 255
+    };
+  }
+  hasColor(index) {
+    return this._coloredChannels.has(String(index));
+  }
+  getHex(index) {
+    let color = this.getColor(index);
+   return 0xFF000000 | (color.r << 16) | (color.g << 8) | color.b;
+  }
+}
+
+function circleEffect(gameScene, xPos, yPos, radius, radius2, duration, filled = false, _0x550b4a /*idk what this is*/ = false, color = 16777215) {
+  const graphics = gameScene.add.graphics().setScrollFactor(0).setDepth(55).setBlendMode(S);
+  const targets = {
+    r: radius,
+    t: 0
+  };
+  gameScene.tweens.add({
+    targets: targets,
+    r: radius2,
+    t: 1,
+    duration: duration,
+    ease: filled && !_0x550b4a ? "Quad.Out" : "Linear",
+    onUpdate: () => {
+      const alpha = _0x550b4a ? targets.t < 0.5 ? targets.t * 2 : (1 - targets.t) * 2 : 1 - targets.t;
+      graphics.clear();
+      if (filled) {
+        graphics.fillStyle(color, Math.max(0, alpha));
+        graphics.fillCircle(xPos, yPos, targets.r);
+      } else {
+        graphics.lineStyle(4, color, Math.max(0, alpha));
+        graphics.strokeCircle(xPos, yPos, targets.r);
+      }
+    },
+    onComplete: () => graphics.destroy()
+  });
+}
+function particleEffect(gameScene, color1 = 16777215, color2 = 16777215) {
+  if (window.enableLDM) return;
+  const basePos = 200;
+  const xPos = basePos + (screenWidth - 400) * Math.random();
+  const yPos = basePos + Math.random() * 240;
+  circleEffect(gameScene, xPos, yPos, 40, 140 + Math.random() * 60, 500, true, true, color2);
+  gameScene.add.particles(xPos, yPos, "GJ_WebSheet", {
+    frame: "square.png",
+    speed: {
+      min: 520,
+      max: 920
+    },
+    angle: {
+      min: 0,
+      max: 360
+    },
+    scale: {
+      start: 0.4,
+      end: 0.13
+    },
+    alpha: {
+      start: 1,
+      end: 0
+    },
+    lifespan: {
+      min: 0,
+      max: 500
+    },
+    stopAfter: 25,
+    blendMode: S, 
+    tint: color1,
+    x: {
+      min: -20,
+      max: 20
+    },
+    y: {
+      min: -20,
+      max: 20
+    }
+  }).setScrollFactor(0).setDepth(57);
+}

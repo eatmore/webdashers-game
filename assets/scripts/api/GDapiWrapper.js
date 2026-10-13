@@ -1,1 +1,97 @@
-window.ApiWrapper=class{static proxyurl="https://proxy.corsfix.com/?";static setProxy(e){this.proxyurl=e}static getProxy(){return this.proxyurl}static async downloadSong(e){let i=`songID=${e}&secret=Wmfd2893gb7`,a=await(await window.fetchGdApi("/getGJSongInfo.php",{method:"POST",body:i})).text(),r=decodeURIComponent(a?.split("~|~10~|~")[1]?.split("~|~")[0]),l=await(await window.fetchGdAudio(r)).blob();return window.URL.createObjectURL(l)}static async downloadSfx(e){let o=await(await window.fetchGdAudio("https://geometrydashfiles.b-cdn.net/sfx/s"+e+".ogg")).blob();return window.URL.createObjectURL(o)}static async downloadLevel(e){let i=`levelID=${e}&secret=Wmfd2893gb7`,a=await(await window.fetchGdApi("/downloadGJLevel22.php",{method:"POST",body:i})).text();function r(l){let n=l.split(":"),d={};for(let s=0;s<n.length;s+=2){let h=n[s],p=n[s+1];d[h]=p}return d}let t=r(a);return new LevelObject(t[1],t[2],atob(t[3]||""),t[4],t[5],t[6],t[8],t[9],t[10],t[11],t[12],t[13],t[14],t[15],t[16],t[17]==="1",t[18],t[19],t[25]==="1",t[26],t[27],t[28],t[29],t[30],t[31]==="1",t[35],t[36],t[37],t[38]==="1",t[39],t[40]==="1",t[41],t[42],t[43],t[44]==="1",t[45],t[46],t[47],t[48],t[52]?.split(",")||[],t[53]?.split(",")||[],t[54],t[57])}};class LevelObject{constructor(e,i,o,a,r,t,l,n,d,s,h,p,w,u,f,g,b,m,y,x,D,S,v,I,L,G,A,R,O,P,T,U,j,C,W,k,N,J,$,q,z,M,V){this.levelID=e,this.levelName=i,this.description=o,this.levelString=a,this.version=r,this.playerID=t,this.difficultyDenominator=l,this.difficultyNumerator=n,this.downloads=d,this.setCompletes=s,this.officialSong=h,this.gameVersion=p,this.likes=w,this.levelLength=u,this.dislikes=f,this.demon=g,this.stars=b,this.featureScore=m,this.auto=y,this.recordString=x,this.password=D,this.uploadDate=S,this.updateDate=v,this.copiedID=I,this.twoPlayer=L,this.customSongID=G,this.extraString=A,this.coins=R,this.verifiedCoins=O,this.starsRequested=P,this.lowDetailMode=T,this.dailyNumber=U,this.epic=j,this.demonDifficulty=C,this.isGauntlet=W,this.objects=k,this.editorTime=N,this.editorTimeCopies=J,this.settingsString=$,this.songIDs=q,this.sfxIDs=z,this.songSize=M,this.verificationTime=V}}
+window.ApiWrapper = class ApiWrapper {
+	static proxyurl = "https://proxy.corsfix.com/?"
+	static setProxy(string) {
+		this.proxyurl = string
+	}
+	static getProxy() {
+		return this.proxyurl;
+	}
+	static async downloadSong(id) {
+		let data = `songID=${id}&secret=Wmfd2893gb7`
+		let response = await window.fetchGdApi("/getGJSongInfo.php", {
+			method: "POST",
+			body: data
+		});
+		let text = await response.text();
+		let url = decodeURIComponent(text?.split("~|~10~|~")[1]?.split("~|~")[0]);
+		let audioresponse = await window.fetchGdAudio(url);
+		let blob = await audioresponse.blob();
+		return window.URL.createObjectURL(blob);
+	}
+    static async downloadSfx(id){
+		let audioresponse = await window.fetchGdAudio("https://geometrydashfiles.b-cdn.net/sfx/s"+id+".ogg");
+		let blob = await audioresponse.blob();
+		return window.URL.createObjectURL(blob);
+    }
+	static async downloadLevel(id) {
+		let data = `levelID=${id}&secret=Wmfd2893gb7`
+		let response = await window.fetchGdApi("/downloadGJLevel22.php", {
+			method: "POST",
+			body: data
+		});
+		let text = await response.text();
+
+		function parseresponse(text) {
+			let parts = text.split(":");
+			let data = {};
+
+			for (let i = 0; i < parts.length; i += 2) {
+				let key = parts[i];
+				let value = parts[i + 1];
+				data[key] = value;
+			}
+			return data;
+		}
+		let parsed = parseresponse(text);
+		return new LevelObject(parsed["1"], parsed["2"], atob(parsed["3"] || ""), parsed["4"], parsed["5"], parsed["6"], parsed["8"], parsed["9"], parsed["10"], parsed["11"], parsed["12"], parsed["13"], parsed["14"], parsed["15"], parsed["16"], parsed["17"] === "1", parsed["18"], parsed["19"], parsed["25"] === "1", parsed["26"], parsed["27"], parsed["28"], parsed["29"], parsed["30"], parsed["31"] === "1", parsed["35"], parsed["36"], parsed["37"], parsed["38"] === "1", parsed["39"], parsed["40"] === "1", parsed["41"], parsed["42"], parsed["43"], parsed["44"] === "1", parsed["45"], parsed["46"], parsed["47"], parsed["48"], parsed["52"]?.split(",") || [], parsed["53"]?.split(",") || [], parsed["54"], parsed["57"]);
+	}
+}
+
+
+class LevelObject {
+	constructor(levelID, levelName, description, levelString, version, playerID, difficultyDenominator, difficultyNumerator, downloads, setCompletes, officialSong, gameVersion, likes, levelLength, dislikes, demon, stars, featureScore, auto, recordString, password, uploadDate, updateDate, copiedID, twoPlayer, customSongID, extraString, coins, verifiedCoins, starsRequested, lowDetailMode, dailyNumber, epic, demonDifficulty, isGauntlet, objects, editorTime, editorTimeCopies, settingsString, songIDs, sfxIDs, songSize, verificationTime) {
+		this.levelID = levelID;
+		this.levelName = levelName;
+		this.description = description;
+		this.levelString = levelString;
+		this.version = version;
+		this.playerID = playerID;
+		this.difficultyDenominator = difficultyDenominator;
+		this.difficultyNumerator = difficultyNumerator;
+		this.downloads = downloads;
+		this.setCompletes = setCompletes;
+		this.officialSong = officialSong;
+		this.gameVersion = gameVersion;
+		this.likes = likes;
+		this.levelLength = levelLength;
+		this.dislikes = dislikes;
+		this.demon = demon;
+		this.stars = stars;
+		this.featureScore = featureScore;
+		this.auto = auto;
+		this.recordString = recordString;
+		this.password = password;
+		this.uploadDate = uploadDate;
+		this.updateDate = updateDate;
+		this.copiedID = copiedID;
+		this.twoPlayer = twoPlayer;
+		this.customSongID = customSongID;
+		this.extraString = extraString;
+		this.coins = coins;
+		this.verifiedCoins = verifiedCoins;
+		this.starsRequested = starsRequested;
+		this.lowDetailMode = lowDetailMode;
+		this.dailyNumber = dailyNumber;
+		this.epic = epic;
+		this.demonDifficulty = demonDifficulty;
+		this.isGauntlet = isGauntlet;
+		this.objects = objects;
+		this.editorTime = editorTime;
+		this.editorTimeCopies = editorTimeCopies;
+		this.settingsString = settingsString;
+		this.songIDs = songIDs;
+		this.sfxIDs = sfxIDs;
+		this.songSize = songSize;
+		this.verificationTime = verificationTime;
+	}
+}

@@ -1,7 +1,7 @@
 {
     "textures": [
         {
-            "image": "player_dart_00.webp",
+            "image": "player_dart_00.png",
             "format": "RGBA8888",
             "size": {
                 "w": 330,
@@ -10,7 +10,7 @@
             "scale": 1.0,
             "frames": [
                 {
-                    "filename": "player_dart_00_001.webp",
+                    "filename": "player_dart_00_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "player_dart_00_2_001.webp",
+                    "filename": "player_dart_00_2_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "player_dart_00_glow_001.webp",
+                    "filename": "player_dart_00_glow_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {

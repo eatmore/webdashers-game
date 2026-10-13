@@ -1,6 +1,6 @@
 {
   "frames": {
-    "colourPicker.webp": {
+    "colourPicker.png": {
       "frame": {
         "x": 1,
         "y": 1591,
@@ -20,7 +20,7 @@
         "h": 52
       }
     },
-    "colourPickerBackground.webp": {
+    "colourPickerBackground.png": {
       "frame": {
         "x": 698,
         "y": 325,
@@ -40,7 +40,7 @@
         "h": 440
       }
     },
-    "colourPickerOverlay.webp": {
+    "colourPickerOverlay.png": {
       "frame": {
         "x": 698,
         "y": 766,
@@ -60,7 +60,7 @@
         "h": 440
       }
     },
-    "colourPickerShadow.webp": {
+    "colourPickerShadow.png": {
       "frame": {
         "x": 602,
         "y": 1207,
@@ -80,7 +80,7 @@
         "h": 440
       }
     },
-    "hueBar.webp": {
+    "hueBar.png": {
       "frame": {
         "x": 1,
         "y": 1,
@@ -100,7 +100,7 @@
         "h": 1168
       }
     },
-    "huePickerBackground.webp": {
+    "huePickerBackground.png": {
       "frame": {
         "x": 1,
         "y": 990,
@@ -120,7 +120,7 @@
         "h": 600
       }
     },
-    "lightnessBar.webp": {
+    "lightnessBar.png": {
       "frame": {
         "x": 1,
         "y": 82,
@@ -140,7 +140,7 @@
         "h": 1168
       }
     },
-    "menuCircleWhite.webp": {
+    "menuCircleWhite.png": {
       "frame": {
         "x": 1043,
         "y": 1207,
@@ -160,7 +160,7 @@
         "h": 120
       }
     },
-    "menuColourPanelBackground.webp": {
+    "menuColourPanelBackground.png": {
       "frame": {
         "x": 1,
         "y": 325,
@@ -180,7 +180,7 @@
         "h": 664
       }
     },
-    "saturationBarBottom.webp": {
+    "saturationBarBottom.png": {
       "frame": {
         "x": 1,
         "y": 163,
@@ -200,7 +200,7 @@
         "h": 1168
       }
     },
-    "saturationBarTop.webp": {
+    "saturationBarTop.png": {
       "frame": {
         "x": 1,
         "y": 244,
@@ -224,7 +224,7 @@
   "meta": {
     "app": "https://www.codeandweb.com/texturepacker",
     "version": "1.0",
-    "image": "CCControlColourPickerSpriteSheet-uhd.webp",
+    "image": "CCControlColourPickerSpriteSheet-uhd.png",
     "format": "RGBA8888",
     "size": {
       "w": 1170,

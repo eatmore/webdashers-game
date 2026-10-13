@@ -1,6 +1,6 @@
 info face="Pusab" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
 common lineHeight=67 base=39 scaleW=512 scaleH=512 pages=1 packed=0
-page id=0 file="bigFont.webp"
+page id=0 file="bigFont.png"
 chars count=96
 char id=32     x=453   y=443   width=0     height=0     xoffset=0     yoffset=63    xadvance=30    page=0 chnl=0 letter="space"
 char id=33     x=1     y=126   width=33    height=55    xoffset=-1    yoffset=10    xadvance=24    page=0 chnl=0 letter="!"

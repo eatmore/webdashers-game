@@ -1,7 +1,7 @@
 {
     "textures": [
         {
-            "image": "GJ_LaunchSheet-hd.webp",
+            "image": "GJ_LaunchSheet-hd.png",
             "format": "RGBA8888",
             "size": {
                 "w": 934,
@@ -10,7 +10,7 @@
             "scale": 1.0,
             "frames": [
                 {
-                    "filename": "GJ_lite_001.webp",
+                    "filename": "GJ_lite_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_logo_001.webp",
+                    "filename": "GJ_logo_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "GJ_md_001.webp",
+                    "filename": "GJ_md_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -73,7 +73,7 @@
                     }
                 },
                 {
-                    "filename": "RobTopLogoBig_001.webp",
+                    "filename": "RobTopLogoBig_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "filename": "cocos2DxLogo.webp",
+                    "filename": "cocos2DxLogo.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "filename": "fmodLogo.webp",
+                    "filename": "fmodLogo.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -136,7 +136,7 @@
                     }
                 },
                 {
-                    "filename": "gj_subzeroLogo_001.webp",
+                    "filename": "gj_subzeroLogo_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {
@@ -157,7 +157,7 @@
                     }
                 },
                 {
-                    "filename": "gj_worldLogo_001.webp",
+                    "filename": "gj_worldLogo_001.png",
                     "rotated": false,
                     "trimmed": true,
                     "sourceSize": {

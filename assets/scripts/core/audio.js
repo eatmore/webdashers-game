@@ -1,1 +1,585 @@
-window.SongDB={db:null,init:function(){return new Promise((d,e)=>{if(this.db)return d();const t=indexedDB.open("GDSongDB",1);t.onupgradeneeded=s=>{s.target.result.createObjectStore("songs")},t.onsuccess=s=>{this.db=s.target.result,d()},t.onerror=()=>e(t.error)})},save:async function(d,e){return await this.init(),new Promise((t,s)=>{const i=this.db.transaction("songs","readwrite");i.objectStore("songs").put(e,String(d)),i.oncomplete=t,i.onerror=()=>s(i.error)})},load:async function(d){return await this.init(),new Promise((e,t)=>{const n=this.db.transaction("songs","readonly").objectStore("songs").get(String(d));n.onsuccess=()=>e(n.result),n.onerror=()=>t(n.error)})},delete:async function(d){return await this.init(),new Promise((e,t)=>{const n=this.db.transaction("songs","readwrite").objectStore("songs").delete(String(d));n.onsuccess=e,n.onerror=()=>t(n.error)})},isDownloaded:async function(d){return await this.init(),new Promise(e=>{const i=this.db.transaction("songs","readonly").objectStore("songs").count(String(d));i.onsuccess=()=>e(i.result>0),i.onerror=()=>e(!1)})}},window.SongDB.init().catch(console.warn);class AudioManager{constructor(e){this._scene=e,this._music=null,this._userMusicVol=localStorage.getItem("userMusicVol")??1,this._meteringEnabled=!1,this._analyser=null,this._meterBuffer=null,this._meterValue=.1,this._lastAudio=.1,this._lastPeak=0,this._silenceCounter=0,this._pendingMusicLoadKey=null,this._pendingMusicLoadOffset=0,this._pendingMusicFadeDuration=null,this._missingMusicWarned=new Set,this._pendingOnlineSongLoadKey=null,this._pendingOnlineSongLoadOffset=0,this._pendingOnlineSongFadeDuration=null}_effectiveVolume(){return this._userMusicVol*.8}get musicPlaying(){return!!this._pendingMusicLoadKey||!!this._pendingOnlineSongLoadKey||this.isplaying()}_getLevelSongStartOffset(){const e=window.settingsMap?.kA13??0,t=Number(e);return Number.isFinite(t)?t:0}_shouldUsePracticeSong(){return!!(this._scene?._practicedMode?.practiceMode&&!window.practiceMusicSync)}_getOfficialSongAudioPath(e=window.currentlevel?.[0]){if(!e||!Array.isArray(window.allLevels))return null;const t=Array.isArray(window.currentlevel)?window.currentlevel:null;if(t&&t[0]===e&&t[4])return"assets/music/"+t[4]+".mp3";const s=window.allLevels.find(n=>n&&n[0]===e);return s?"assets/music/"+(s[4]||String(s[1]||e).replaceAll(" ",""))+".mp3":null}_loadMissingOfficialSong(e,t=0,s=null){const i=this._getOfficialSongAudioPath(e),n=this._scene?.load;if(!i||!n||!this._scene?.cache?.audio)return e&&!this._missingMusicWarned.has(e)&&(console.warn("Missing audio cache and no official song path found for",e),this._missingMusicWarned.add(e)),!1;if(this._pendingMusicLoadKey===e)return this._pendingMusicLoadOffset=t,this._pendingMusicFadeDuration=s,!0;this._pendingMusicLoadKey=e,this._pendingMusicLoadOffset=t,this._pendingMusicFadeDuration=s;const o=()=>{const r=this._pendingMusicLoadKey===e&&window.currentlevel?.[0]===e,l=this._pendingMusicLoadOffset,a=this._pendingMusicFadeDuration;this._pendingMusicLoadKey=null,this._pendingMusicLoadOffset=0,this._pendingMusicFadeDuration=null,!(!r||!this._scene.cache.audio.exists(e))&&(a!=null?this.fadeInMusic(a):this.startMusic(l))},c=r=>{r&&r.key!==e||(this._pendingMusicLoadKey===e&&(this._pendingMusicLoadKey=null,this._pendingMusicLoadOffset=0,this._pendingMusicFadeDuration=null),console.warn("Failed to load official song audio",e,i))};try{return n.audio(e,i),n.once("complete",o),n.once("loaderror",c),n.isLoading()||n.start(),!0}catch(r){return c({key:e}),console.warn("Failed to queue official song audio",e,i,r),!1}}async _loadMissingOnlineSong(e,t=0,s=null){const i=String(e||"").match(/^ng_song_(\d+)$/),n=i?i[1]:null,c=this._scene?.game?.sound?.context,r=typeof window.getGdApiUrl=="function"?window.getGdApiUrl("/getGJSongInfo.php"):null;return!n||!c||!r?!1:this._pendingOnlineSongLoadKey===e?(this._pendingOnlineSongLoadOffset=t,this._pendingOnlineSongFadeDuration=s,!0):(this._pendingOnlineSongLoadKey=e,this._pendingOnlineSongLoadOffset=t,this._pendingOnlineSongFadeDuration=s,(async()=>{try{c.state==="suspended"&&await c.resume();const l=await window.fetchGdApi("/getGJSongInfo.php",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:`songID=${encodeURIComponent(n)}&secret=Wmfd2893gb7`}),a=l.ok?await l.text():"-1";if(!a||a==="-1")throw new Error("Song info unavailable");const _=a.split("~|~"),f={};for(let p=0;p+1<_.length;p+=2)f[_[p]]=_[p+1];const h=(f[2]||`Song #${n}`).replace(/:$/,"").trim(),g=(f[4]||"Unknown").replace(/:$/,"").trim(),m=await window.SongDB.load(n);if(!m)throw new Error("Song not downloaded manually");const u=await c.decodeAudioData(m.slice(0));if(this._pendingOnlineSongLoadKey!==e)return;const w=this._pendingOnlineSongLoadOffset,S=this._pendingOnlineSongFadeDuration;this._pendingOnlineSongLoadKey=null,this._pendingOnlineSongLoadOffset=0,this._pendingOnlineSongFadeDuration=null,window._onlineSongBuffer=u,window._onlineSongKey=e,window._onlineSongTitle=h,window._onlineSongArtist=g,Array.isArray(window.currentlevel)&&window.currentlevel[0]===e&&(window.currentlevel[3]=["Local",g],S!=null?this.fadeInMusic(S):this.startMusic(w))}catch(l){this._pendingOnlineSongLoadKey===e&&(this._pendingOnlineSongLoadKey=null,this._pendingOnlineSongLoadOffset=0,this._pendingOnlineSongFadeDuration=null),console.warn("Failed to load online song audio",e,l)}})(),!0)}startMusic(e=0){let t=0,s=null;if(this._music&&this._music.isPlaying&&(t=this._music.seek||0,s=this._music.key),this._music&&(this._music.stop(),this._music.destroy()),this._shouldUsePracticeSong()){const o="StayInsideMe";if(this._scene.cache.audio.exists(o)){this._music=this._scene.sound.add(o,{loop:!0,volume:this._effectiveVolume()}),this._music.play(),s===o&&t>0&&(this._music.seek=t),this._setupAnalyser(),this._musicPlaying=!0;return}}if(window._onlineSongBuffer&&window._onlineSongKey===window.currentlevel?.[0]){const o=this._getLevelSongStartOffset();this._playOnlineBuffer(window._onlineSongBuffer,o+e),this._setupAnalyser(),this._musicPlaying=!0;return}const i=window.currentlevel?.[0];if(!i){this._setupAnalyser();return}if(!this._scene.cache.audio.exists(i)){if(this._loadMissingOnlineSong(i,e)||this._loadMissingOfficialSong(i,e)){this._setupAnalyser();return}this._setupAnalyser();return}this._music=this._scene.sound.add(i,{loop:!1,volume:this._effectiveVolume()}),this._music.play();const n=this._getLevelSongStartOffset();this._music.seek=n+e,this._setupAnalyser(),this._musicPlaying=!0}_playOnlineBuffer(e,t=0){const s=this._scene.game.sound,i=s.context;if(!i)return;if(this._onlineSource){try{this._onlineSource.stop()}catch{}try{this._onlineSource.disconnect()}catch{}this._onlineSource=null}i.state==="suspended"&&i.resume();const n=i.createGain();n.gain.value=this._effectiveVolume();const o=s.masterVolumeNode||s.destination||i.destination;n.connect(o);const c=Math.max(0,Math.min(t,e.duration-.01)),r=i.createBufferSource();r.buffer=e,r.loop=!0,r.connect(n),r.start(0,c),this._onlineSource=r,this._onlineGain=n;let l=!0,a=!1,_=c,f=i.currentTime;const h=this,g=u=>{try{u.stop()}catch{}try{u.disconnect()}catch{}},m={get isPlaying(){return l},get isPaused(){return a},key:window.currentlevel?.[0]||window._onlineSongKey||"online",stop:()=>{l=!1,a=!1,g(h._onlineSource||r);try{n.disconnect()}catch{}h._onlineSource=null,h._onlineGain=null},destroy:()=>{m.stop()},pause:()=>{!l||a||(_=(i.currentTime-f+_)%e.duration,g(h._onlineSource),h._onlineSource=null,l=!1,a=!0)},resume:()=>{if(!a)return;const u=i.createBufferSource();u.buffer=e,u.loop=!0,u.connect(n),u.start(0,_),h._onlineSource=u,f=i.currentTime,l=!0,a=!1},setLoop:()=>{},get volume(){return n.gain.value},set volume(u){n.gain.value=u}};this._music=m}startMenuMusic(){this._music&&(this._music.stop(),this._music.destroy()),this._music=this._scene.sound.add("menu_music",{loop:!0,volume:this._effectiveVolume()}),this._music.play(),this._setupAnalyser(),this._musicPlaying=!0}stopMusic(){this._music&&this._music.stop(),this._musicPlaying=!1}isplaying(){return this._music!=null&&this._music.isPlaying!=!1}pauseMusic(){this._music&&this._music.isPlaying&&this._music.pause()}resumeMusic(){this._music&&this._music.isPaused&&this._music.resume()}getUserMusicVolume(){return this._userMusicVol}setUserMusicVolume(e){this._userMusicVol=e,localStorage.setItem("userMusicVol",e),this._music&&(this._music.volume=this._effectiveVolume())}getMusicVolume(){return this._effectiveVolume()}setMusicVolume(e){this.setUserMusicVolume(e/.8)}fadeInMusic(e=1e3){if(this._music&&(this._music.stop(),this._music.destroy()),this._shouldUsePracticeSong()){const s="StayInsideMe";if(this._scene.cache.audio.exists(s)){this._music=this._scene.sound.add(s,{loop:!0,volume:0}),this._music.play(),this._setupAnalyser(),this._musicPlaying=!0;return}}if(window._onlineSongBuffer&&window._onlineSongKey===window.currentlevel?.[0]){const s=window._onlineSongOffset||0;this._playOnlineBuffer(window._onlineSongBuffer,s),this._onlineGain&&(this._onlineGain.gain.value=this._effectiveVolume()),this._setupAnalyser(),this._musicPlaying=!0;return}const t=window.currentlevel?.[0];if(!t){this._setupAnalyser();return}if(!this._scene.cache.audio.exists(t)){if(this._loadMissingOnlineSong(t,0,e)||this._loadMissingOfficialSong(t,0,e)){this._setupAnalyser();return}this._setupAnalyser();return}this._music=this._scene.sound.add(t,{loop:!0,volume:0}),this._music.play(),this._setupAnalyser(),this._scene.tweens.add({targets:this._music,volume:this._effectiveVolume(),duration:e}),this._musicPlaying=!0}fadeOutMusic(e=1500){this._music&&this._music.isPlaying&&(this._music.setLoop(!1),this._scene.tweens.add({targets:this._music,volume:0,duration:e,onComplete:()=>{this._music&&this._music.stop()}}))}playEffect(e,t={}){if(this._scene.sound.context&&this._scene.cache.audio.exists(e)){const s=this._scene.sound.add(e),i=t&&Object.prototype.hasOwnProperty.call(t,"volume")?Number(t.volume):1,n=Number(this._scene?._sfxVolume??localStorage.getItem("userSfxVol")??1),o=Number.isFinite(i)?i:1,c=Number.isFinite(n)?n:1;s.play({volume:Math.max(0,o*c)})}}_setupAnalyser(){const e=this._scene.sound.context;e&&(this._analyser=e.createAnalyser(),this._analyser.fftSize=2048,this._meterBuffer=new Float32Array(this._analyser.fftSize),this._scene.sound.masterVolumeNode.connect(this._analyser),this._meteringEnabled=!0)}_ensureCorrectMusicMode(){if(this._scene?._practiceMusicSyncChangePendingUntilRestart||this._pendingMusicLoadKey||this._pendingOnlineSongLoadKey||!this._music)return;const e=this._shouldUsePracticeSong()?"StayInsideMe":window.currentlevel?.[0];if((this._music?.key||(this._onlineSource?window._onlineSongKey:null))!==e){const s=typeof this._scene._getCurrentMusicSyncOffset=="function"?this._scene._getCurrentMusicSyncOffset():this._scene._getStartPosMusicOffset();this.startMusic(s)}}update(e){if(!this._meteringEnabled||!this._analyser)return;this._analyser.getFloatTimeDomainData(this._meterBuffer);let t=0;for(let n=0;n<this._meterBuffer.length;n++){let o=Math.abs(this._meterBuffer[n]);o>t&&(t=o)}const s=this._effectiveVolume();s>0&&(t/=s),this._meterValue=.1+t;const i=e*60;this._silenceCounter<3||this._meterValue<this._lastAudio*1.1||this._meterValue<this._lastPeak*.95&&this._lastAudio>this._lastPeak*.2?this._meterValue=this._lastAudio*Math.pow(.92,i):(this._silenceCounter=0,this._lastPeak=this._meterValue,this._meterValue*=Math.pow(1.46,i)),this._meterValue<=.1&&(this._lastPeak=0),this._lastAudio=this._meterValue,this._silenceCounter++}getMeteringValue(){return this._meterValue}reset(){this._meterValue=.1,this._lastAudio=.1,this._lastPeak=0,this._silenceCounter=0,this._pendingMusicLoadKey=null,this._pendingMusicLoadOffset=0,this._pendingMusicFadeDuration=null,this._pendingOnlineSongLoadKey=null,this._pendingOnlineSongLoadOffset=0,this._pendingOnlineSongFadeDuration=null,this.stopMusic()}}
+window.SongDB = {
+  db: null,
+  init: function() {
+    return new Promise((resolve, reject) => {
+      if (this.db) return resolve();
+      const req = indexedDB.open("GDSongDB", 1);
+      req.onupgradeneeded = e => {
+        e.target.result.createObjectStore("songs");
+      };
+      req.onsuccess = e => {
+        this.db = e.target.result;
+        resolve();
+      };
+      req.onerror = () => reject(req.error);
+    });
+  },
+  save: async function(id, arrayBuffer) {
+    await this.init();
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction("songs", "readwrite");
+      const store = tx.objectStore("songs");
+      store.put(arrayBuffer, String(id));
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  },
+  load: async function(id) {
+    await this.init();
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction("songs", "readonly");
+      const store = tx.objectStore("songs");
+      const req = store.get(String(id));
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  },
+  delete: async function(id) {
+    await this.init();
+    return new Promise((resolve, reject) => {
+      const tx = this.db.transaction("songs", "readwrite");
+      const store = tx.objectStore("songs");
+      const req = store.delete(String(id));
+      req.onsuccess = resolve;
+      req.onerror = () => reject(req.error);
+    });
+  },
+  isDownloaded: async function(id) {
+    await this.init();
+    return new Promise((resolve) => {
+      const tx = this.db.transaction("songs", "readonly");
+      const store = tx.objectStore("songs");
+      const req = store.count(String(id));
+      req.onsuccess = () => resolve(req.result > 0);
+      req.onerror = () => resolve(false);
+    });
+  }
+};
+window.SongDB.init().catch(console.warn);
+
+class AudioManager {
+  constructor(scene) {
+    this._scene = scene;
+    this._music = null;
+    this._userMusicVol = localStorage.getItem("userMusicVol") ?? 1;
+    this._meteringEnabled = false;
+    this._analyser = null;
+    this._meterBuffer = null;
+    this._meterValue = 0.1;
+    this._lastAudio = 0.1;
+    this._lastPeak = 0;
+    this._silenceCounter = 0;
+    this._pendingMusicLoadKey = null;
+    this._pendingMusicLoadOffset = 0;
+    this._pendingMusicFadeDuration = null;
+    this._missingMusicWarned = new Set();
+    this._pendingOnlineSongLoadKey = null;
+    this._pendingOnlineSongLoadOffset = 0;
+    this._pendingOnlineSongFadeDuration = null;
+  }
+  _effectiveVolume() {
+    return this._userMusicVol * 0.8;
+  }
+  get musicPlaying() {
+    return !!this._pendingMusicLoadKey || !!this._pendingOnlineSongLoadKey || this.isplaying();
+  }
+  _getLevelSongStartOffset() {
+    const rawOffset = window.settingsMap?.["kA13"] ?? 0;
+    const parsedOffset = Number(rawOffset);
+    return Number.isFinite(parsedOffset) ? parsedOffset : 0;
+  }
+  _shouldUsePracticeSong() {
+    return !!(this._scene?._practicedMode?.practiceMode && !window.practiceMusicSync);
+  }
+  _getOfficialSongAudioPath(songKey = window.currentlevel?.[0]) {
+    if (!songKey || !Array.isArray(window.allLevels)) return null;
+
+    const currentLevel = Array.isArray(window.currentlevel) ? window.currentlevel : null;
+    if (currentLevel && currentLevel[0] === songKey && currentLevel[4]) {
+      return "assets/music/" + currentLevel[4] + ".mp3";
+    }
+
+    const levelEntry = window.allLevels.find(level => level && level[0] === songKey);
+    if (!levelEntry) return null;
+
+    const fileName = levelEntry[4] || String(levelEntry[1] || songKey).replaceAll(" ", "");
+    return "assets/music/" + fileName + ".mp3";
+  }
+  _loadMissingOfficialSong(songKey, startPosOffset = 0, fadeDuration = null) {
+    const audioPath = this._getOfficialSongAudioPath(songKey);
+    const loader = this._scene?.load;
+
+    if (!audioPath || !loader || !this._scene?.cache?.audio) {
+      if (songKey && !this._missingMusicWarned.has(songKey)) {
+        console.warn("Missing audio cache and no official song path found for", songKey);
+        this._missingMusicWarned.add(songKey);
+      }
+      return false;
+    }
+
+    if (this._pendingMusicLoadKey === songKey) {
+      this._pendingMusicLoadOffset = startPosOffset;
+      this._pendingMusicFadeDuration = fadeDuration;
+      return true;
+    }
+
+    this._pendingMusicLoadKey = songKey;
+    this._pendingMusicLoadOffset = startPosOffset;
+    this._pendingMusicFadeDuration = fadeDuration;
+
+    const playAfterLoad = () => {
+      const shouldPlay = this._pendingMusicLoadKey === songKey && window.currentlevel?.[0] === songKey;
+      const nextOffset = this._pendingMusicLoadOffset;
+      const nextFadeDuration = this._pendingMusicFadeDuration;
+
+      this._pendingMusicLoadKey = null;
+      this._pendingMusicLoadOffset = 0;
+      this._pendingMusicFadeDuration = null;
+
+      if (!shouldPlay || !this._scene.cache.audio.exists(songKey)) return;
+
+      if (nextFadeDuration !== null && nextFadeDuration !== undefined) {
+        this.fadeInMusic(nextFadeDuration);
+      } else {
+        this.startMusic(nextOffset);
+      }
+    };
+
+    const clearFailedLoad = (file) => {
+      if (file && file.key !== songKey) return;
+      if (this._pendingMusicLoadKey === songKey) {
+        this._pendingMusicLoadKey = null;
+        this._pendingMusicLoadOffset = 0;
+        this._pendingMusicFadeDuration = null;
+      }
+      console.warn("Failed to load official song audio", songKey, audioPath);
+    };
+
+    try {
+      loader.audio(songKey, audioPath);
+      loader.once("complete", playAfterLoad);
+      loader.once("loaderror", clearFailedLoad);
+      if (!loader.isLoading()) {
+        loader.start();
+      }
+      return true;
+    } catch (err) {
+      clearFailedLoad({ key: songKey });
+      console.warn("Failed to queue official song audio", songKey, audioPath, err);
+      return false;
+    }
+  }
+  async _loadMissingOnlineSong(songKey, startPosOffset = 0, fadeDuration = null) {
+    const match = String(songKey || "").match(/^ng_song_(\d+)$/);
+    const songId = match ? match[1] : null;
+    const soundMgr = this._scene?.game?.sound;
+    const ctx = soundMgr?.context;
+    const songInfoUrl = (typeof window.getGdApiUrl === "function" ? window.getGdApiUrl("/getGJSongInfo.php") : null);
+
+    if (!songId || !ctx || !songInfoUrl) {
+      return false;
+    }
+
+    if (this._pendingOnlineSongLoadKey === songKey) {
+      this._pendingOnlineSongLoadOffset = startPosOffset;
+      this._pendingOnlineSongFadeDuration = fadeDuration;
+      return true;
+    }
+
+    this._pendingOnlineSongLoadKey = songKey;
+    this._pendingOnlineSongLoadOffset = startPosOffset;
+    this._pendingOnlineSongFadeDuration = fadeDuration;
+
+    (async () => {
+      try {
+        if (ctx.state === "suspended") await ctx.resume();
+
+        const ngRes = await window.fetchGdApi("/getGJSongInfo.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `songID=${encodeURIComponent(songId)}&secret=Wmfd2893gb7`
+        });
+
+        const ngText = ngRes.ok ? await ngRes.text() : "-1";
+        if (!ngText || ngText === "-1") throw new Error("Song info unavailable");
+
+        const ngParts = ngText.split("~|~");
+        const ngMap = {};
+        for (let i = 0; i + 1 < ngParts.length; i += 2) ngMap[ngParts[i]] = ngParts[i + 1];
+
+        const songTitle = (ngMap["2"] || `Song #${songId}`).replace(/:$/, "").trim();
+        const songArtist = (ngMap["4"] || "Unknown").replace(/:$/, "").trim();
+        
+        const arrayBuf = await window.SongDB.load(songId);
+        if (!arrayBuf) throw new Error("Song not downloaded manually");
+        
+        const decoded = await ctx.decodeAudioData(arrayBuf.slice(0));
+
+        if (this._pendingOnlineSongLoadKey !== songKey) return;
+
+        const nextOffset = this._pendingOnlineSongLoadOffset;
+        const nextFadeDuration = this._pendingOnlineSongFadeDuration;
+
+        this._pendingOnlineSongLoadKey = null;
+        this._pendingOnlineSongLoadOffset = 0;
+        this._pendingOnlineSongFadeDuration = null;
+
+        window._onlineSongBuffer = decoded;
+        window._onlineSongKey = songKey;
+        window._onlineSongTitle = songTitle;
+        window._onlineSongArtist = songArtist;
+
+        if (Array.isArray(window.currentlevel) && window.currentlevel[0] === songKey) {
+          window.currentlevel[3] = ["Local", songArtist];
+          if (nextFadeDuration !== null && nextFadeDuration !== undefined) {
+            this.fadeInMusic(nextFadeDuration);
+          } else {
+            this.startMusic(nextOffset);
+          }
+        }
+      } catch (err) {
+        if (this._pendingOnlineSongLoadKey === songKey) {
+          this._pendingOnlineSongLoadKey = null;
+          this._pendingOnlineSongLoadOffset = 0;
+          this._pendingOnlineSongFadeDuration = null;
+        }
+        console.warn("Failed to load online song audio", songKey, err);
+      }
+    })();
+
+    return true;
+  }
+  startMusic(StartPosOffset = 0) {
+    let savedPosition = 0;
+    let savedKey = null;
+    if (this._music && this._music.isPlaying) {
+      savedPosition = this._music.seek || 0;
+      savedKey = this._music.key;
+    }  
+    if (this._music) {
+      this._music.stop();
+      this._music.destroy();
+    }
+    if (this._shouldUsePracticeSong()) {
+      const practiceSongKey = "StayInsideMe";
+      if (this._scene.cache.audio.exists(practiceSongKey)) {
+        this._music = this._scene.sound.add(practiceSongKey, {
+          loop: true,
+          volume: this._effectiveVolume()
+        });
+        this._music.play();
+        if (savedKey === practiceSongKey && savedPosition > 0) {
+          this._music.seek = savedPosition;
+        }
+        this._setupAnalyser();
+        this._musicPlaying = true;
+        return;
+      }
+    }
+    if (window._onlineSongBuffer && window._onlineSongKey === window.currentlevel?.[0]) {
+      const startOffset = this._getLevelSongStartOffset();
+      this._playOnlineBuffer(window._onlineSongBuffer, startOffset + StartPosOffset);
+      this._setupAnalyser();
+      this._musicPlaying = true;
+      return;
+    }
+    const _songKey = window.currentlevel?.[0];
+    if (!_songKey) {
+      this._setupAnalyser();
+      return;
+    }
+    if (!this._scene.cache.audio.exists(_songKey)) {
+      if (this._loadMissingOnlineSong(_songKey, StartPosOffset) || this._loadMissingOfficialSong(_songKey, StartPosOffset)) {
+        this._setupAnalyser();
+        return;
+      }
+      this._setupAnalyser();
+      return;
+    }
+    this._music = this._scene.sound.add(_songKey, {
+      loop: false,
+      volume: this._effectiveVolume()
+    });
+    this._music.play();
+    const startOffset = this._getLevelSongStartOffset();
+    this._music.seek = startOffset + StartPosOffset;
+    this._setupAnalyser();
+    this._musicPlaying = true;
+  }
+  _playOnlineBuffer(audioBuffer, startOffset = 0) {
+    const soundMgr = this._scene.game.sound;
+    const ctx = soundMgr.context;
+    if (!ctx) return;
+    if (this._onlineSource) {
+      try { this._onlineSource.stop(); } catch(e) {}
+      try { this._onlineSource.disconnect(); } catch(e) {}
+      this._onlineSource = null;
+    }
+    if (ctx.state === 'suspended') { ctx.resume(); }
+    const gainNode = ctx.createGain();
+    gainNode.gain.value = this._effectiveVolume();
+    const dest = soundMgr.masterVolumeNode || soundMgr.destination || ctx.destination;
+    gainNode.connect(dest);
+    const safeOffset = Math.max(0, Math.min(startOffset, audioBuffer.duration - 0.01));
+    const source = ctx.createBufferSource();
+    source.buffer = audioBuffer;
+    source.loop = true;
+    source.connect(gainNode);
+    source.start(0, safeOffset);
+    this._onlineSource = source;
+    this._onlineGain   = gainNode;
+    let _isPlaying = true;
+    let _isPaused  = false;
+    let _pauseOffset = safeOffset;
+    let _startedAt   = ctx.currentTime;
+    const self = this;
+    const _stopSource = (src) => {
+      try { src.stop();       } catch(e) {}
+      try { src.disconnect(); } catch(e) {}
+    };
+    const musicObj = {
+      get isPlaying() { return _isPlaying; },
+      get isPaused()  { return _isPaused;  },
+      key: window.currentlevel?.[0] || window._onlineSongKey || "online",
+      stop: () => {
+        _isPlaying = false;
+        _isPaused  = false;
+        _stopSource(self._onlineSource || source);
+        try { gainNode.disconnect(); } catch(e) {}
+        self._onlineSource = null;
+        self._onlineGain = null;
+      },
+      destroy: () => { musicObj.stop(); },
+      pause: () => {
+        if (!_isPlaying || _isPaused) return;
+        _pauseOffset = (ctx.currentTime - _startedAt + _pauseOffset) % audioBuffer.duration;
+        _stopSource(self._onlineSource);
+        self._onlineSource = null;
+        _isPlaying = false;
+        _isPaused  = true;
+      },
+      resume: () => {
+        if (!_isPaused) return;
+        const newSrc = ctx.createBufferSource();
+        newSrc.buffer = audioBuffer;
+        newSrc.loop = true;
+        newSrc.connect(gainNode);
+        newSrc.start(0, _pauseOffset);
+        self._onlineSource = newSrc;
+        _startedAt  = ctx.currentTime;
+        _isPlaying  = true;
+        _isPaused   = false;
+      },
+      setLoop: () => {},
+      get volume() { return gainNode.gain.value; },
+      set volume(v) { gainNode.gain.value = v; }
+    };
+
+    this._music = musicObj;
+  }
+  startMenuMusic() {
+    if (this._music) {
+      this._music.stop();
+      this._music.destroy();
+    }
+    this._music = this._scene.sound.add("menu_music", {
+      loop: true,
+      volume: this._effectiveVolume()
+    });
+    this._music.play();
+    this._setupAnalyser();
+    this._musicPlaying = true;
+  }
+  stopMusic() {
+    if (this._music) {
+      this._music.stop();
+    }
+    this._musicPlaying = false;
+  }
+  isplaying() {
+    return this._music != null && this._music.isPlaying != false;
+  }
+  pauseMusic() {
+    if (this._music && this._music.isPlaying) {
+      this._music.pause();
+    }
+  }
+  resumeMusic() {
+    if (this._music && this._music.isPaused) {
+      this._music.resume();
+    }
+  }
+  getUserMusicVolume() {
+    return this._userMusicVol;
+  }
+  setUserMusicVolume(newVolume) {
+    this._userMusicVol = newVolume;
+    localStorage.setItem("userMusicVol", newVolume);
+    if (this._music) {
+      this._music.volume = this._effectiveVolume();
+    }
+  }
+  getMusicVolume() {
+    return this._effectiveVolume();
+  }
+  setMusicVolume(newVolume) {
+    this.setUserMusicVolume(newVolume / 0.8);
+  }
+  fadeInMusic(durationMillis = 1000) {
+    if (this._music) {
+      this._music.stop();
+      this._music.destroy();
+    }
+    if (this._shouldUsePracticeSong()) {
+      const practiceSongKey = "StayInsideMe";
+      if (this._scene.cache.audio.exists(practiceSongKey)) {
+        this._music = this._scene.sound.add(practiceSongKey, {
+          loop: true,
+          volume: 0
+        });
+        this._music.play();
+        this._setupAnalyser();
+        this._musicPlaying = true;
+        return;
+      }
+    }
+    
+    if (window._onlineSongBuffer && window._onlineSongKey === window.currentlevel?.[0]) {
+      const startOffset = window._onlineSongOffset || 0;
+      this._playOnlineBuffer(window._onlineSongBuffer, startOffset);
+      if (this._onlineGain) {
+        this._onlineGain.gain.value = this._effectiveVolume();
+      }
+      this._setupAnalyser();
+      this._musicPlaying = true;
+      return;
+    }
+
+    const songKey = window.currentlevel?.[0];
+    if (!songKey) {
+      this._setupAnalyser();
+      return;
+    }
+
+    if (!this._scene.cache.audio.exists(songKey)) {
+      if (this._loadMissingOnlineSong(songKey, 0, durationMillis) || this._loadMissingOfficialSong(songKey, 0, durationMillis)) {
+        this._setupAnalyser();
+        return;
+      }
+      this._setupAnalyser();
+      return;
+    }
+
+    this._music = this._scene.sound.add(songKey, {
+      loop: true,
+      volume: 0
+    });
+    this._music.play();
+    this._setupAnalyser();
+    this._scene.tweens.add({
+      targets: this._music,
+      volume: this._effectiveVolume(),
+      duration: durationMillis
+    });
+    this._musicPlaying = true;
+  }
+  fadeOutMusic(durationMillis = 1500) {
+    if (this._music && this._music.isPlaying) {
+      this._music.setLoop(false);
+      this._scene.tweens.add({
+        targets: this._music,
+        volume: 0,
+        duration: durationMillis,
+        onComplete: () => {
+          if (this._music) {
+            this._music.stop();
+          }
+        }
+      });
+    }
+  }
+  playEffect(soundEffect, volumeObj = {}) {
+    if (this._scene.sound.context && this._scene.cache.audio.exists(soundEffect)) {
+      const soundObject = this._scene.sound.add(soundEffect);
+      const rawBaseVolume = volumeObj && Object.prototype.hasOwnProperty.call(volumeObj, "volume")
+        ? Number(volumeObj.volume)
+        : 1;
+      const rawSfxVolume = Number(this._scene?._sfxVolume ?? localStorage.getItem("userSfxVol") ?? 1);
+      const baseVolume = Number.isFinite(rawBaseVolume) ? rawBaseVolume : 1;
+      const sfxVolume = Number.isFinite(rawSfxVolume) ? rawSfxVolume : 1;
+      soundObject.play({
+        volume: Math.max(0, baseVolume * sfxVolume)
+      });
+    }
+  }
+  _setupAnalyser() {
+    const audioContext = this._scene.sound.context;
+    if (audioContext) {
+      this._analyser = audioContext.createAnalyser();
+      this._analyser.fftSize = 2048;
+      this._meterBuffer = new Float32Array(this._analyser.fftSize);
+      this._scene.sound.masterVolumeNode.connect(this._analyser);
+      this._meteringEnabled = true;
+    }
+  }
+  _ensureCorrectMusicMode() {
+    if (this._scene?._practiceMusicSyncChangePendingUntilRestart) return;
+    if (this._pendingMusicLoadKey || this._pendingOnlineSongLoadKey) return;
+    if (!this._music) return;
+    const expectedSongKey = this._shouldUsePracticeSong() ? "StayInsideMe" : window.currentlevel?.[0];
+    const currentSongKey = this._music?.key || (this._onlineSource ? window._onlineSongKey : null);
+    if (currentSongKey !== expectedSongKey) {
+      const offset = typeof this._scene._getCurrentMusicSyncOffset === "function"
+        ? this._scene._getCurrentMusicSyncOffset()
+        : this._scene._getStartPosMusicOffset();
+      this.startMusic(offset);
+    }
+  }
+  update(timeSeconds) {
+    if (!this._meteringEnabled || !this._analyser) {
+      return;
+    }
+    this._analyser.getFloatTimeDomainData(this._meterBuffer);
+    let biggestBuf = 0;
+    for (let index = 0; index < this._meterBuffer.length; index++) {
+      let buf = Math.abs(this._meterBuffer[index]);
+      if (buf > biggestBuf) {
+        biggestBuf = buf;
+      }
+    }
+    const volume = this._effectiveVolume();
+    if (volume > 0) {
+      biggestBuf /= volume;
+    }
+    this._meterValue = 0.1 + biggestBuf;
+    const timeMinutes = timeSeconds * 60;
+    if (this._silenceCounter < 3 || this._meterValue < this._lastAudio * 1.1 || this._meterValue < this._lastPeak * 0.95 && this._lastAudio > this._lastPeak * 0.2) {
+      this._meterValue = this._lastAudio * Math.pow(0.92, timeMinutes);
+    } else {
+      this._silenceCounter = 0;
+      this._lastPeak = this._meterValue;
+      this._meterValue *= Math.pow(1.46, timeMinutes);
+    }
+    if (this._meterValue <= 0.1) {
+      this._lastPeak = 0;
+    }
+    this._lastAudio = this._meterValue;
+    this._silenceCounter++;
+  }
+  getMeteringValue() {
+    return this._meterValue;
+  }
+  reset() {
+    this._meterValue = 0.1;
+    this._lastAudio = 0.1;
+    this._lastPeak = 0;
+    this._silenceCounter = 0;
+    this._pendingMusicLoadKey = null;
+    this._pendingMusicLoadOffset = 0;
+    this._pendingMusicFadeDuration = null;
+    this._pendingOnlineSongLoadKey = null;
+    this._pendingOnlineSongLoadOffset = 0;
+    this._pendingOnlineSongFadeDuration = null;
+    this.stopMusic();
+  }
+}

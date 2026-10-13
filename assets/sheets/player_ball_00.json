@@ -1,7 +1,7 @@
 {
     "textures": [
         {
-            "image": "icons/player_ball_00-hd.webp",
+            "image": "icons/player_ball_00-hd.png",
             "format": "RGBA4444",
             "size": {
                 "w": 184,
@@ -10,7 +10,7 @@
             "scale": 1.0,
             "frames": [
                 {
-                    "filename": "player_ball_00_001.webp",
+                    "filename": "player_ball_00_001.png",
                     "rotated": true,
                     "trimmed": false,
                     "sourceSize": {
@@ -31,7 +31,7 @@
                     }
                 },
                 {
-                    "filename": "player_ball_00_2_001.webp",
+                    "filename": "player_ball_00_2_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
@@ -52,7 +52,7 @@
                     }
                 },
                 {
-                    "filename": "player_ball_00_glow_001.webp",
+                    "filename": "player_ball_00_glow_001.png",
                     "rotated": false,
                     "trimmed": false,
                     "sourceSize": {
